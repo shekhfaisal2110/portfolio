@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.text-shadow {
+  text-shadow: 0 0 10px rgba(0, 198, 255, 0.8);
+} */
+
+/* src/index.css or App.css */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b; /* Tailwind's gray-800 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #06b6d4; /* Tailwind's cyan-500 */
+  border-radius: 8px;
+  border: 2px solid #1e293b;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #06b6d4 #1e293b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* testimonioal page animation */
+@keyframes pingOnce {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pingOnce {
+  animation: pingOnce 0.8s ease-in-out;
+}
