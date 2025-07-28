@@ -342,7 +342,7 @@ const Services = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-xl blur opacity-70 group-hover:opacity-100 transition duration-300 animate-pulse" />
                 <a
-                  href="contact"
+                  href="#contact"
                   className="relative flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-lg rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:shadow-cyan-400/40"
                 >
                   <FaRocket className="text-xl animate-bounce group-hover:animate-pulse" />
@@ -353,7 +353,7 @@ const Services = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-400 to-pink-600 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
                 <a
-                  href="portfolio"
+                  href="#portfolio"
                   className="relative flex items-center gap-3 px-10 py-5 bg-white/10 backdrop-blur-lg border-2 border-white/30 hover:border-white/50 text-white font-bold text-lg rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:bg-white/20 hover:shadow-purple-400/30"
                 >
                   <FaHeart className="text-xl animate-pulse group-hover:animate-bounce" />

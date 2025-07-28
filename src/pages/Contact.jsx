@@ -666,7 +666,7 @@ const Contact = () => {
               <div className="group/cta relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-green-300 via-emerald-400 to-cyan-400 rounded-xl blur opacity-0 group-hover/cta:opacity-100 transition-all duration-500" />
                 <a
-                  href="portfolio"
+                  href="#portfolio"
                   className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-400/40"
                 >
                   <FaRocket className="animate-bounce group-hover/cta:animate-pulse" />
@@ -677,7 +677,7 @@ const Contact = () => {
               <div className="group/cta relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-300 via-red-400 to-pink-400 rounded-xl blur opacity-0 group-hover/cta:opacity-100 transition-all duration-500" />
                 <a
-                  href="about"
+                  href="#about"
                   className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-400/40"
                 >
                   <FaHeart className="animate-pulse group-hover/cta:animate-bounce" />

@@ -137,12 +137,12 @@ const Header = () => {
 
   const navLinks = [
     { to: '/', icon: <FaHome />, label: 'Home', color: 'from-cyan-500 to-blue-600' },
-    { to: 'about', icon: <FaUser />, label: 'About', color: 'from-purple-500 to-pink-600' },
-    { to: 'portfolio', icon: <FaBriefcase />, label: 'Portfolio', color: 'from-green-500 to-cyan-600' },
-    { to: 'services', icon: <FaCogs />, label: 'Services', color: 'from-orange-500 to-red-600' },
-    { to: 'testimonials', icon: <FaQuoteRight />, label: 'Testimonials', color: 'from-indigo-500 to-purple-600' },
-    { to: 'resume', icon: <FaFileAlt />, label: 'Resume', color: 'from-yellow-500 to-orange-600' },
-    { to: 'contact', icon: <FaEnvelope />, label: 'Contact', color: 'from-blue-500 to-indigo-600' },
+    { to: '#about', icon: <FaUser />, label: 'About', color: 'from-purple-500 to-pink-600' },
+    { to: '#portfolio', icon: <FaBriefcase />, label: 'Portfolio', color: 'from-green-500 to-cyan-600' },
+    { to: '#services', icon: <FaCogs />, label: 'Services', color: 'from-orange-500 to-red-600' },
+    { to: '#testimonials', icon: <FaQuoteRight />, label: 'Testimonials', color: 'from-indigo-500 to-purple-600' },
+    { to: '#resume', icon: <FaFileAlt />, label: 'Resume', color: 'from-yellow-500 to-orange-600' },
+    { to: '#contact', icon: <FaEnvelope />, label: 'Contact', color: 'from-blue-500 to-indigo-600' },
   ];
 
   useEffect(() => {

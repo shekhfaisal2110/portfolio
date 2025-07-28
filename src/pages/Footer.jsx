@@ -265,11 +265,11 @@ const Footer = () => {
                   
                   <ul className="flex flex-wrap justify-center gap-4 md:gap-6">
                     {[
-                      { href: "hero", label: "Home", icon: <FaHome />, color: "from-cyan-500 to-blue-600" },
-                      { href: "about", label: "About", icon: <FaUser />, color: "from-purple-500 to-pink-600" },
-                      { href: "portfolio", label: "Portfolio", icon: <FaBriefcase />, color: "from-green-500 to-cyan-600" },
-                      { href: "services", label: "Services", icon: <FaCogs />, color: "from-orange-500 to-red-600" },
-                      { href: "contact", label: "Contact", icon: <FaEnvelope />, color: "from-blue-500 to-indigo-600" },
+                      { href: "#hero", label: "Home", icon: <FaHome />, color: "from-cyan-500 to-blue-600" },
+                      { href: "#about", label: "About", icon: <FaUser />, color: "from-purple-500 to-pink-600" },
+                      { href: "#portfolio", label: "Portfolio", icon: <FaBriefcase />, color: "from-green-500 to-cyan-600" },
+                      { href: "#services", label: "Services", icon: <FaCogs />, color: "from-orange-500 to-red-600" },
+                      { href: "#contact", label: "Contact", icon: <FaEnvelope />, color: "from-blue-500 to-indigo-600" },
                     ].map((link, i) => (
                       <li key={i} className="group/nav relative">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl blur opacity-0 group-hover/nav:opacity-75 transition duration-300" />

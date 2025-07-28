@@ -409,7 +409,7 @@ const About = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-xl blur opacity-100 group-hover:opacity-100 transition duration-300 animate-pulse" />
                 <a
-                  href="contact"
+                  href="#contact"
                   className="relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center gap-3"
                 >
                   <FaEnvelope className="text-xl animate-bounce" />
@@ -420,7 +420,7 @@ const About = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-400 to-pink-600 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
                 <a
-                  href="portfolio"
+                  href="#portfolio"
                   className="relative px-10 py-5 bg-white/15 backdrop-blur-lg border-2 border-white/30 text-white font-bold text-lg rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:bg-white/25 flex items-center gap-3"
                 >
                   <FaRocket className="text-xl animate-pulse" />

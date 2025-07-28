@@ -8,11 +8,13 @@ import Testimonials from './pages/Testimonials';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
+import Header from './pages/Header';
 
 const AppRouter = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/header" element={<Header />} />
         <Route path="/" element={<Hero />} />
         <Route path="/about" element={<About />} />
         <Route path="/portfolio" element={<Portfolio />} />

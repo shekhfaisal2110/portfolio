@@ -541,7 +541,7 @@ const Resume = () => {
               <div className="group/cta1 relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-green-300 to-emerald-400 rounded-xl blur opacity-0 group-hover/cta1:opacity-100 transition-all duration-500" />
                 <a
-                  href="contact"
+                  href="#contact"
                   className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-400/40"
                 >
                   <FaRocket className="animate-bounce group-hover/cta1:animate-pulse group-hover/cta1:scale-110 transition-transform duration-300" />
@@ -552,7 +552,7 @@ const Resume = () => {
               <div className="group/cta2 relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-orange-300 to-red-400 rounded-xl blur opacity-0 group-hover/cta2:opacity-100 transition-all duration-500" />
                 <a
-                  href="portfolio"
+                  href="#portfolio"
                   className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-400/40"
                 >
                   <FaExternalLinkAlt className="animate-pulse group-hover/cta2:animate-bounce group-hover/cta2:scale-110 transition-transform duration-300" />
@@ -563,7 +563,7 @@ const Resume = () => {
               <div className="group/cta3 relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-pink-300 to-purple-400 rounded-xl blur opacity-0 group-hover/cta3:opacity-100 transition-all duration-500" />
                 <a
-                  href="testimonials"
+                  href="#testimonials"
                   className="relative flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-400/40"
                 >
                   <FaHeart className="animate-pulse group-hover/cta3:animate-bounce group-hover/cta3:scale-110 transition-transform duration-300" />
