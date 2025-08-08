@@ -25,11 +25,10 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/resume" element={<Resume />} />
-
+            <Route path="/Footer" element={<Footer />} />
             <Route path="*" element={<NotFound />} /> {/* ✅ Catch-all route */}
           </Routes>
         </main>
-        <Footer />
       </div>
     </Router>
   );
