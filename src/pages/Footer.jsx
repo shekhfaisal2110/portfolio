@@ -1,116 +1,3 @@
-// // import React from "react";
-// // import {
-// //   FaHome,
-// //   FaUser,
-// //   FaBriefcase,
-// //   FaCogs,
-// //   FaEnvelope,
-// //   FaGithub,
-// //   FaLinkedin,
-// //   FaInstagram,
-// // } from "react-icons/fa";
-// // import { Link } from 'react-router-dom';
-// // import connectImg from '../assets/icons/connect.png';
-
-// // const Footer = () => {
-// //   return (
-// //     <footer
-// //       className="bg-gradient-to-br from-gray-950 to-gray-900 text-white py-12"
-// //       aria-labelledby="footer-title"
-// //     >
-// //       <div className="max-w-6xl mx-auto px-4">
-// //         {/* Title */}
-// //         <h2
-// //           id="footer-title"
-// //           className="text-2xl md:text-3xl font-bold text-center mb-8 flex items-center justify-center gap-2"
-// //         >
-// //           <img src={connectImg} alt="Connect Icon" className="w-6 h-6" />
-// //           Let's Connect
-// //         </h2>
-
-// //         {/* Navigation Links */}
-// //         <ul className="flex flex-wrap justify-center gap-6 md:gap-10 mb-8 text-sm md:text-base font-medium">
-// //   {[
-// //     { href: "/", label: "Home", icon: <FaHome /> },
-// //     { href: "/about", label: "About", icon: <FaUser /> },
-// //     { href: "/portfolio", label: "Portfolio", icon: <FaBriefcase /> },
-// //     { href: "/services", label: "Services", icon: <FaCogs /> },
-// //     { href: "/contact", label: "Contact", icon: <FaEnvelope /> },
-// //   ].map((link, i) => (
-// //     <li key={i}>
-// //       <a
-// //         href={link.href}
-// //         aria-label={`Go to ${link.label}`}
-// //         className="flex items-center gap-2 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:scale-105 hover:text-shadow transition-all duration-300"
-// //       >
-// //         {link.icon} {link.label}
-// //       </a>
-// //     </li>
-// //   ))}
-// // </ul>
-
-
-// //         {/* Social Icons */}
-// //         <div className="flex justify-center gap-6 text-2xl mb-8">
-// //           {[
-// //             {
-// //               href: "https://github.com/shekhfaisal2110",
-// //               icon: <FaGithub />,
-// //               label: "GitHub Profile",
-// //             },
-// //             {
-// //               href: "https://www.linkedin.com/in/faisal-shaikh-3064582a4",
-// //               icon: <FaLinkedin />,
-// //               label: "LinkedIn Profile",
-// //             },
-// //             {
-// //               href: "https://www.instagram.com/_shaikh__sahab_19_8",
-// //               icon: <FaInstagram />,
-// //               label: "Instagram Profile",
-// //             },
-// //           ].map((item, i) => (
-// //             <a
-// //               key={i}
-// //               href={item.href}
-// //               aria-label={item.label}
-// //               target="_blank"
-// //               rel="noopener noreferrer"
-// //               className="text-cyan-400 hover:text-indigo-400 transition transform hover:scale-110"
-// //             >
-// //               {item.icon}
-// //             </a>
-// //           ))}
-// //         </div>
-
-// //         {/* Copyright & Policy */}
-// //         <div className="text-center border-t border-gray-800 pt-6">
-// //           <p className="text-sm mb-3 text-gray-400">
-// //             &copy; 2024 <strong className="text-white">Shekh Faisal</strong>. All rights reserved.
-// //           </p>
-
-// //           <ul className="flex justify-center gap-6 text-xs font-medium">
-// //             {[
-// //               { label: "Privacy Policy", href: "#" },
-// //               { label: "Terms of Use", href: "#" },
-// //             ].map((item, i) => (
-// //               <li key={i}>
-// //                 <a
-// //                   href={item.href}
-// //                   className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:text-shadow transition-all duration-300"
-// //                 >
-// //                   {item.label}
-// //                 </a>
-// //               </li>
-// //             ))}
-// //           </ul>
-// //         </div>
-// //       </div>
-// //     </footer>
-// //   );
-// // };
-
-// // export default Footer;
-
 import React, { useState, useEffect } from "react";
 import {
   FaHome,
@@ -265,11 +152,11 @@ const Footer = () => {
                   
                   <ul className="flex flex-wrap justify-center gap-4 md:gap-6">
                     {[
-                      { href: "#hero", label: "Home", icon: <FaHome />, color: "from-cyan-500 to-blue-600" },
-                      { href: "#about", label: "About", icon: <FaUser />, color: "from-purple-500 to-pink-600" },
-                      { href: "#portfolio", label: "Portfolio", icon: <FaBriefcase />, color: "from-green-500 to-cyan-600" },
-                      { href: "#services", label: "Services", icon: <FaCogs />, color: "from-orange-500 to-red-600" },
-                      { href: "#contact", label: "Contact", icon: <FaEnvelope />, color: "from-blue-500 to-indigo-600" },
+                      { href: "/hero", label: "Home", icon: <FaHome />, color: "from-cyan-500 to-blue-600" },
+                      { href: "/about", label: "About", icon: <FaUser />, color: "from-purple-500 to-pink-600" },
+                      { href: "/portfolio", label: "Portfolio", icon: <FaBriefcase />, color: "from-green-500 to-cyan-600" },
+                      { href: "/services", label: "Services", icon: <FaCogs />, color: "from-orange-500 to-red-600" },
+                      { href: "/contact", label: "Contact", icon: <FaEnvelope />, color: "from-blue-500 to-indigo-600" },
                     ].map((link, i) => (
                       <li key={i} className="group/nav relative">
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl blur opacity-0 group-hover/nav:opacity-75 transition duration-300" />

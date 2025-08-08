@@ -1,145 +1,3 @@
-// // // // import React, { useEffect, useState } from "react";
-// // // // import {
-// // // //   FaCalendarAlt,
-// // // //   FaPhoneAlt,
-// // // //   FaMapMarkerAlt,
-// // // //   FaGlobe,
-// // // //   FaUser,
-// // // //   FaGraduationCap,
-// // // //   FaEnvelope,
-// // // //   FaBriefcase,
-// // // // } from "react-icons/fa";
-// // // // import myImg from '../assets/portfolio/my_image.jpeg';
-// // // // import workingImg from '../assets/icons/working.png'
-
-
-// // // // const About = () => {
-// // // //   const [age, setAge] = useState(null);
-
-// // // //   useEffect(() => {
-// // // //     const birthDate = new Date("2005-09-26");
-// // // //     const today = new Date();
-// // // //     const years = today.getFullYear() - birthDate.getFullYear();
-// // // //     const hasBirthdayPassed =
-// // // //       today.getMonth() > birthDate.getMonth() ||
-// // // //       (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
-// // // //     setAge(hasBirthdayPassed ? years : years - 1);
-// // // //   }, []);
-
-// // // //   return (
-// // // //     <section
-// // // //       id="about"
-// // // //       aria-labelledby="about-title"
-// // // //       className="py-20 min-h-screen bg-gradient-to-br from-gray-950 to-gray-900 text-white"
-// // // //     >
-// // // //       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-// // // //         {/* About Image */}
-// // // //         <div className="flex justify-center">
-// // // // <img
-// // // //   src={myImg}
-// // // //   alt="Picture of Shekh Faisal"
-// // // //   className="rounded-2xl shadow-2xl w-full max-w-sm object-cover animate-fade-in transition-transform duration-300 hover:scale-105"
-// // // // />
-
-// // // //         </div>
-
-// // // //         {/* About Content */}
-// // // //         <div className="space-y-6 animate-fade-in">
-// // // //           <h2 id="about-title" className="text-4xl font-bold flex items-center gap-3">
-// // // //             <img src={workingImg} alt="About Me Icon" className="w-8 h-8" />
-// // // //             About Me
-// // // //           </h2>
-
-// // // //           <p className="text-lg leading-relaxed text-gray-300">
-// // // //             Hello! I'm <span className="text-cyan-400 font-semibold">Shekh Faisal</span>, a dedicated and passionate{" "}
-// // // //             <span className="text-cyan-400 font-semibold">Web Developer</span> who loves transforming ideas into
-// // // //             functional and visually appealing websites. With a strong foundation in modern technologies and a knack for
-// // // //             problem-solving, I ensure every project meets user expectations.
-// // // //           </p>
-// // // //           <p className="text-lg leading-relaxed text-gray-300">
-// // // //             What sets me apart? A blend of creativity and technical expertise that enables me to deliver clean,
-// // // //             efficient code while maintaining exceptional user experiences.
-// // // //           </p>
-
-// // // //           {/* Personal Details */}
-// // // //           <div className="grid sm:grid-cols-2 gap-6 text-sm sm:text-base text-gray-300">
-// // // //             <ul className="space-y-2">
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaCalendarAlt className="text-indigo-500" />
-// // // //                 <strong className="w-24">Birthday:</strong> <span>26 Sept 2005</span>
-// // // //               </li>
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaPhoneAlt className="text-indigo-500" />
-// // // //                 <strong className="w-24">Phone:</strong>{" "}
-// // // //                 <a href="tel:+919173195287" className="text-cyan-400 hover:underline">+91 9173195287</a>
-// // // //               </li>
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaMapMarkerAlt className="text-indigo-500" />
-// // // //                 <strong className="w-24">City:</strong> <span>Ahmedabad, India</span>
-// // // //               </li>
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaGlobe className="text-indigo-500" />
-// // // //                 <strong className="w-24">Website:</strong>
-// // // //                 <a
-// // // //                   href="https://shekhfaisal2110.github.io/ShekhFaisalTech/"
-// // // //                   target="_blank"
-// // // //                   rel="noopener noreferrer"
-// // // //                   className="text-cyan-400 hover:underline"
-// // // //                 >
-// // // //                   shekhfaisaltech.github.io
-// // // //                 </a>
-// // // //               </li>
-// // // //             </ul>
-// // // //             <ul className="space-y-2">
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaUser className="text-indigo-500" /> <strong className="w-24">Age:</strong>{" "}
-// // // //                 <span>{age ?? "Loading..."}</span>
-// // // //               </li>
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaGraduationCap className="text-indigo-500" />
-// // // //                 <strong className="w-24">Degree:</strong> <span>BCA (Pursuing)</span>
-// // // //               </li>
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaEnvelope className="text-indigo-500" />
-// // // //                 <strong className="w-24">Email:</strong>
-// // // //                 <a
-// // // //                   href="mailto:shekhfaisal.2110@gmail.com"
-// // // //                   className="text-cyan-400 hover:underline"
-// // // //                 >
-// // // //                   shekhfaisal.2110@gmail.com
-// // // //                 </a>
-// // // //               </li>
-// // // //               <li className="flex items-center gap-2">
-// // // //                 <FaBriefcase className="text-indigo-500" />
-// // // //                 <strong className="w-24">Freelance:</strong> <span>Available</span>
-// // // //               </li>
-// // // //             </ul>
-// // // //           </div>
-
-// // // //           {/* Highlights */}
-// // // //           <ul className="mt-4 space-y-2 list-disc list-inside text-sm sm:text-base text-gray-300">
-// // // //             <li>✅ Proficient in modern web technologies like HTML, CSS, JavaScript, and React.</li>
-// // // //             <li>✅ Experienced in building responsive, user-friendly designs.</li>
-// // // //             <li>✅ Passionate about solving real-world problems with innovative solutions.</li>
-// // // //           </ul>
-
-// // // //           {/* CTA Button */}
-// // // //           <a
-// // // //             href="/contact"
-// // // //             className="inline-block mt-6 bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 transition-all text-white font-medium px-6 py-3 rounded-lg shadow-md hover:shadow-lg"
-// // // //             role="button"
-// // // //           >
-// // // //             Contact Me
-// // // //           </a>
-// // // //         </div>
-// // // //       </div>
-// // // //     </section>
-// // // //   );
-// // // // };
-
-// // // // export default About;
-
-
 import React, { useEffect, useState } from "react";
 import {
   FaCalendarAlt,
@@ -409,7 +267,7 @@ const About = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-xl blur opacity-100 group-hover:opacity-100 transition duration-300 animate-pulse" />
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center gap-3"
                 >
                   <FaEnvelope className="text-xl animate-bounce" />
@@ -420,7 +278,7 @@ const About = () => {
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-400 to-pink-600 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
                 <a
-                  href="#portfolio"
+                  href="/portfolio"
                   className="relative px-10 py-5 bg-white/15 backdrop-blur-lg border-2 border-white/30 text-white font-bold text-lg rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:bg-white/25 flex items-center gap-3"
                 >
                   <FaRocket className="text-xl animate-pulse" />

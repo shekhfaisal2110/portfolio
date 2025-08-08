@@ -1,116 +1,3 @@
-// // // import React, { useState, useEffect, useRef } from 'react';
-// // // import { Link, useLocation } from 'react-router-dom';
-// // // import {
-// // //   FaHome,
-// // //   FaUser,
-// // //   FaBriefcase,
-// // //   FaCogs,
-// // //   FaEnvelope,
-// // //   FaQuoteRight,
-// // //   FaFileAlt,
-// // //   FaBars,
-// // //   FaTimes,
-// // // } from 'react-icons/fa';
-// // // import logoImg from '../assets/logo/icon.jpg';
-
-// // // const Header = () => {
-// // //   const [menuOpen, setMenuOpen] = useState(false);
-// // //   const location = useLocation();
-// // //   const menuRef = useRef(null);
-
-// // //   const navLinks = [
-// // //     { to: '/', icon: <FaHome />, label: 'Home' },
-// // //     { to: '/about', icon: <FaUser />, label: 'About' },
-// // //     { to: '/portfolio', icon: <FaBriefcase />, label: 'Portfolio' },
-// // //     { to: '/services', icon: <FaCogs />, label: 'Services' },
-// // //     { to: '/testimonials', icon: <FaQuoteRight />, label: 'Testimonials' },
-// // //     { to: '/resume', icon: <FaFileAlt />, label: 'Resume' },
-// // //     { to: '/contact', icon: <FaEnvelope />, label: 'Contact' },
-// // //   ];
-
-// // //   // ✅ Close menu when clicked outside
-// // //   useEffect(() => {
-// // //     const handleClickOutside = (event) => {
-// // //       if (menuRef.current && !menuRef.current.contains(event.target)) {
-// // //         setMenuOpen(false);
-// // //       }
-// // //     };
-
-// // //     if (menuOpen) {
-// // //       document.addEventListener('mousedown', handleClickOutside);
-// // //     } else {
-// // //       document.removeEventListener('mousedown', handleClickOutside);
-// // //     }
-
-// // //     return () => {
-// // //       document.removeEventListener('mousedown', handleClickOutside);
-// // //     };
-// // //   }, [menuOpen]);
-
-// // //   return (
-// // //     <header className="sticky top-0 z-50 bg-[#0f172a] shadow-md backdrop-blur-sm transition duration-300">
-// // //       <nav
-// // //         ref={menuRef}
-// // //         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 relative"
-// // //       >
-// // //         {/* Logo */}
-// // //         <Link
-// // //           to="/Admin"
-// // //           className="flex items-center gap-2 group relative"
-// // //           aria-label="Go to homepage"
-// // //         >
-// // //           <img
-// // //             src={logoImg}
-// // //             alt="Developer"
-// // //             className="w-10 h-10 rounded-full border-2 border-cyan-400 shadow-md transition-transform duration-300 group-hover:scale-105"
-// // //           />
-// // //           <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-green-400 group-hover:to-cyan-400 transition-all duration-300">
-// // //             MyPortfolio
-// // //           </span>
-// // //         </Link>
-
-// // //         {/* Hamburger */}
-// // // <button
-// // //   onClick={() => setMenuOpen(!menuOpen)}
-// // //   className="lg:hidden text-white text-2xl z-50"
-// // //   aria-label="Toggle menu"
-// // // >
-// // //   {menuOpen ? <FaTimes /> : <FaBars />}
-// // // </button>
-
-// // // {/* Nav Links */}
-// // // <ul
-// // //   className={`flex flex-col lg:flex-row items-center lg:static absolute top-16 left-0 w-full lg:w-auto bg-[#0f172a] lg:bg-transparent transition-all duration-500 ease-in-out lg:translate-y-0 ${
-// // //     menuOpen ? 'translate-y-0' : '-translate-y-[150%]'
-// // //   } lg:space-x-6 text-white py-6 lg:py-0`}
-// // // >
-// // //   {navLinks.map((link, idx) => (
-// // //     <li key={idx} className="my-2 lg:my-0 w-full lg:w-auto text-center">
-// // //       <Link
-// // //         to={link.to}
-// // //         onClick={() => setMenuOpen(false)}
-// // //         className={`flex items-center justify-center lg:justify-start gap-2 px-4 py-2 transition-all duration-300 hover:text-cyan-400 ${
-// // //           location.pathname.toLowerCase() === link.to.toLowerCase()
-// // //             ? 'text-cyan-400 font-semibold'
-// // //             : 'text-white'
-// // //         }`}
-// // //       >
-// // //         <span className="text-lg">{link.icon}</span>
-// // //         <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:scale-105 transition-all duration-300">
-// // //           {link.label}
-// // //         </span>
-// // //       </Link>
-// // //     </li>
-// // //   ))}
-// // // </ul>
-
-// // //       </nav>
-// // //     </header>
-// // //   );
-// // // };
-
-// // // export default Header;
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -137,12 +24,12 @@ const Header = () => {
 
   const navLinks = [
     { to: '/', icon: <FaHome />, label: 'Home', color: 'from-cyan-500 to-blue-600' },
-    { to: '#about', icon: <FaUser />, label: 'About', color: 'from-purple-500 to-pink-600' },
-    { to: '#portfolio', icon: <FaBriefcase />, label: 'Portfolio', color: 'from-green-500 to-cyan-600' },
-    { to: '#services', icon: <FaCogs />, label: 'Services', color: 'from-orange-500 to-red-600' },
-    { to: '#testimonials', icon: <FaQuoteRight />, label: 'Testimonials', color: 'from-indigo-500 to-purple-600' },
-    { to: '#resume', icon: <FaFileAlt />, label: 'Resume', color: 'from-yellow-500 to-orange-600' },
-    { to: '#contact', icon: <FaEnvelope />, label: 'Contact', color: 'from-blue-500 to-indigo-600' },
+    { to: '/about', icon: <FaUser />, label: 'About', color: 'from-purple-500 to-pink-600' },
+    { to: '/portfolio', icon: <FaBriefcase />, label: 'Portfolio', color: 'from-green-500 to-cyan-600' },
+    { to: '/services', icon: <FaCogs />, label: 'Services', color: 'from-orange-500 to-red-600' },
+    { to: '/testimonials', icon: <FaQuoteRight />, label: 'Testimonials', color: 'from-indigo-500 to-purple-600' },
+    { to: '/resume', icon: <FaFileAlt />, label: 'Resume', color: 'from-yellow-500 to-orange-600' },
+    { to: '/contact', icon: <FaEnvelope />, label: 'Contact', color: 'from-blue-500 to-indigo-600' },
   ];
 
   useEffect(() => {
