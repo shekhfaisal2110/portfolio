@@ -56,7 +56,7 @@ const Resume = () => {
       hoverGradient: 'from-purple-400 to-pink-500',
       desc: (
         <>
-          Studied at <span className="text-white font-semibold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Devdi-Gerajpur High School</span>, under the Gujarat Board. Achieved{' '}
+          Studied at <span className="text-white font-semibold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Devdi-Geratpur High School</span>, under the Gujarat Board. Achieved{' '}
           <span className="text-white font-semibold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">88%</span>. Focused on Accountancy, Economics, and Business Studies, building analytical and financial skills.
         </>
       ),
@@ -69,7 +69,7 @@ const Resume = () => {
       hoverGradient: 'from-green-400 to-cyan-500',
       desc: (
         <>
-          Completed secondary education from <span className="text-white font-semibold bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">Devdi-Gerajpur High School</span>, affiliated with the Gujarat Board. Secured{' '}
+          Completed secondary education from <span className="text-white font-semibold bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">Devdi-Geratpur High School</span>, affiliated with the Gujarat Board. Secured{' '}
           <span className="text-white font-semibold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">85%</span>, building a strong academic foundation in core subjects.
         </>
       ),
