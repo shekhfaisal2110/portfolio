@@ -250,13 +250,6 @@ const Services = () => {
                 />
               </h2>
             </div>
-
-            <div className="relative backdrop-blur-lg bg-white/10 p-6 rounded-2xl border border-white/20 shadow-lg max-w-2xl mx-auto">
-              <div className="absolute -inset-1 bg-gradient-to-r from-green-400/20 via-cyan-400/20 to-blue-500/20 rounded-2xl blur opacity-50" />
-              <p className="relative text-lg text-gray-200">
-                Professional expertise in modern web technologies and development tools
-              </p>
-            </div>
           </div>
 
           {/* Enhanced Professional Technical Skills Grid */}

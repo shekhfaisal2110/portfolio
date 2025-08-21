@@ -125,7 +125,7 @@ const Hero = () => {
                       2500,
                       '🚀 Frontend Engineer',
                       2500,
-                      '⚛️ React Specialist',
+                      '⚛️ React Developer',
                       2500,
                       '🎨 UI/UX Designer',
                       2500,
