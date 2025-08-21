@@ -224,7 +224,7 @@ const Resume = () => {
             <div className="relative backdrop-blur-lg bg-white/10 p-8 rounded-3xl border border-white/20 shadow-2xl max-w-3xl mx-auto">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-3xl blur opacity-20" />
               <p className="relative text-xl lg:text-2xl leading-relaxed text-gray-200">
-                Explore my educational journey and professional experience. Each milestone represents dedication, growth, and passion for web development.
+                Explore my educational journey and experience. Each milestone represents dedication, growth, and passion for web development.
               </p>
             </div>
           </div>
