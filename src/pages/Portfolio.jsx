@@ -3,12 +3,6 @@ import {FaCode,FaMobileAlt,FaGamepad,FaDownload,FaExternalLinkAlt,FaReact,FaRobo
 import Header from "./Header";
 import mockPortfolioData from "../data/portfolioData"; 
 import TextScroll from "../ui/text-scroll";
-import MaskedDiv from "../ui/MaskedDiv";
-import img1 from "../assets/projectImg/p.png";
-import img5 from "../assets/projectImg/5.png";
-import img8 from "../assets/projectImg/8.png";
-import img9 from "../assets/projectImg/9.png";
-import img11 from "../assets/projectImg/11.png";
 
 const Portfolio = () => {
   const [portfolioItems, setPortfolioItems] = useState([]);
@@ -514,47 +508,6 @@ const downloadImage = async (url, title) => {
               </div>
             </div>
           )}
-        </div>
-        <div className="items-between m-auto mt-40 flex max-w-5xl flex-wrap justify-between gap-5">
-        <MaskedDiv maskType="type-1" size={0.45} className="my-4">
-  <img
-    src={img1}
-    alt="Descriptive alt text"
-    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover rounded-lg"
-  />
-</MaskedDiv>
-<MaskedDiv maskType="type-1" className="rotate-180">
-  <img
-    src={img9}
-    alt="Descriptive alt text"
-    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
-  />
-</MaskedDiv>
-
-<MaskedDiv maskType="type-3" className="my-4">
-  <img
-    src={img8}
-    alt="Descriptive alt text"
-    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
-  />
-</MaskedDiv>
-
-<MaskedDiv maskType="type-4" className="my-4">
-  <img
-    src={img5}
-    alt="Descriptive alt text"
-    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
-  />
-</MaskedDiv>
-
-<MaskedDiv maskType="type-2" className="my-4">
-  <img
-    src={img11}
-    alt="Descriptive alt text"
-    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
-  />
-</MaskedDiv>
-
         </div>
       </section>
     </>
