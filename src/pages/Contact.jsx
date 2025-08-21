@@ -227,9 +227,9 @@ const Contact = () => {
                 </li>
               </ul>
               <div className="flex justify-center mt-[3rem] md:mt-[5rem] space-x-6 items-center ">
-                <SocialIcon href="https://github.com/shekhfaisal" icon={<FaGithub />} label="GitHub" />
-                <SocialIcon href="https://linkedin.com/in/shekhfaisal" icon={<FaLinkedin />} label="LinkedIn" />
-                <SocialIcon href="https://instagram.com/shekhfaisal" icon={<FaInstagram />} label="Instagram" />
+                <SocialIcon href="https://github.com/shekhfaisal2110" icon={<FaGithub />} label="GitHub" />
+                <SocialIcon href="https://www.linkedin.com/in/mohammad-faisal-shekh" icon={<FaLinkedin />} label="LinkedIn" />
+                <SocialIcon href="https://www.instagram.com/_shaikh__sahab_19_8/?igsh=N3M5a3FvZGxpN290#" icon={<FaInstagram />} label="Instagram" />
               </div>
             </address>
           </div>

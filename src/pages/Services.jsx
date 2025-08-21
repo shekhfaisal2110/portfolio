@@ -2,9 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import {FaCode,FaMobileAlt,FaPaintBrush,FaTools,FaRocket,FaHeart,} from "react-icons/fa";
 import Header from "./Header";
 import TechIconsGrid from "../components/TechIconsGrid";
-
 import TextScroll from "../ui/text-scroll";
 import HoverExpand from "../ui/HoverExpand";
+import bugImg from "../assets/servicesImg/bug.png";
+import resImg from "../assets/servicesImg/res.webp";
+import uiImg from "../assets/servicesImg/ui.png";
+import webImg from "../assets/servicesImg/web.webp";
 
 const Services = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -63,8 +66,8 @@ const Services = () => {
         "Building responsive and high-performance websites with modern technologies and best practices.",
       gradient: "from-cyan-500 to-blue-600",
       bgGradient: "from-cyan-500/10 to-blue-600/10",
-      image: "https://wallpapercave.com/wp/wp6350578.jpg",
-      link: "https://example.com/more-info",
+      image: webImg,
+      link: "https://jobseekersconnect.com/web-developer-roadmap-2025/",
     },
     {
       icon: <FaPaintBrush />,
@@ -73,8 +76,8 @@ const Services = () => {
         "Designing intuitive interfaces with focus on user experience and visual hierarchy.",
       gradient: "from-purple-500 to-pink-600",
       bgGradient: "from-purple-500/10 to-pink-600/10",
-      image: "https://s3-alpha.figma.com/hub/file/2942566861/7e3aaade-4be8-47a8-aa6c-fe6f0c220316-cover.png",
-      link: "https://example.com/more-info",
+      image: uiImg,
+      link: "https://roadmap.sh/ux-design",
     },
     {
       icon: <FaMobileAlt />,
@@ -83,8 +86,8 @@ const Services = () => {
         "Ensuring mobile-first design with cross-browser compatibility and modern layouts.",
       gradient: "from-green-500 to-cyan-600",
       bgGradient: "from-green-500/10 to-cyan-600/10",
-      image: "https://i1.wp.com/www.slickboston.com/wp-content/uploads/2017/11/full-responsive-web-design-logo.jpg?w=1190&ssl=1",
-      link: "https://example.com/more-info",
+      image: resImg,
+      link: "https://dev.to/rakeshreddy512/the-ultimate-css-roadmap-for-frontend-developers-2025-edition-n56",
     },
     {
       icon: <FaTools />,
@@ -93,8 +96,8 @@ const Services = () => {
         "Improving site performance and fixing issues using best coding practices.",
       gradient: "from-orange-500 to-red-600",
       bgGradient: "from-orange-500/10 to-red-600/10",
-      image: "https://media.geeksforgeeks.org/wp-content/uploads/20190902105053/Debugging-Tips-To-Get-Better-At-It.png",
-      link: "https://example.com/more-info",
+      image: bugImg,
+      link: "https://www.eicta.iitk.ac.in/knowledge-hub/full-stack-web-development/advanced-debugging-techniques-for-full-stack-developers",
     },
   ];
 

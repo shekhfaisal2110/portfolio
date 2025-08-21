@@ -156,15 +156,15 @@ const Footer = () => {
                 <div className="flex justify-center gap-6 items-center">
                   {[
                     {
-                      href: "https://github.com/sheikh",
+                      href: "https://github.com/shekhfaisal2110",
                       icon: <FaGithub />,
                     },
                     {
-                      href: "https://linkedin.com/in/someone",
+                      href: "https://www.linkedin.com/in/mohammad-faisal-shekh",
                       icon: <FaLinkedin />,
                     },
                     {
-                      href: "https://instagram.com/someone",
+                      href: "https://www.instagram.com/_shaikh__sahab_19_8/?igsh=N3M5a3FvZGxpN290#",
                       icon: <FaInstagram />,
                     },
                   ].map(({ href, icon }, i) => (
