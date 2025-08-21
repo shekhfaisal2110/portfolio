@@ -1,26 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  FaCode,
-  FaMobileAlt,
-  FaGamepad,
-  FaDownload,
-  FaExternalLinkAlt,
-  FaReact,
-  FaRobot,
-  FaTimes,
-  FaFilter,
-  FaSearch,
-  FaSort,
-  FaFileExport,
-  FaRocket,
-  FaHeart,
-  FaEye,
-  FaLaptopCode,
-  FaPalette
-} from "react-icons/fa";
-import Container3DBackground from "../components/Animated3DBackground";
+import {FaCode,FaMobileAlt,FaGamepad,FaDownload,FaExternalLinkAlt,FaReact,FaRobot,FaTimes,FaFilter,FaSearch,FaSort,FaRocket,FaEye,FaLaptopCode,FaPalette} from "react-icons/fa";
 import Header from "./Header";
-import mockPortfolioData from "../data/portfolioData"; // Import mock data
+import mockPortfolioData from "../data/portfolioData"; 
+import TextScroll from "../ui/text-scroll";
+import MaskedDiv from "../ui/MaskedDiv";
+import img1 from "../assets/projectImg/p.png";
+import img5 from "../assets/projectImg/5.png";
+import img8 from "../assets/projectImg/8.png";
+import img9 from "../assets/projectImg/9.png";
+import img11 from "../assets/projectImg/11.png";
 
 const Portfolio = () => {
   const [portfolioItems, setPortfolioItems] = useState([]);
@@ -132,34 +120,36 @@ const Portfolio = () => {
     });
   };
 
-  const exportToPDF = () => {
-    const projectList = sortedItems.map(item => `${item.title} - ${item.category}`).join('\n');
-    const blob = new Blob([`Portfolio Projects:\n\n${projectList}`], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'portfolio_projects.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+  const sanitizeFilename = (name) => {
+  return name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+};
 
-  const downloadImage = async (url, title) => {
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = blobUrl;
-      link.download = `${title}.png`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-      alert("Image download failed.");
-      console.error(err);
-    }
-  };
+const downloadImage = async (url, title) => {
+  try {
+    const response = await fetch(url, { mode: "cors" });
+    if (!response.ok) throw new Error('Network response was not ok');
+
+    const blob = await response.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const sanitizedTitle = sanitizeFilename(title) || 'download';
+    const link = document.createElement("a");
+    link.href = blobUrl;
+    link.setAttribute('download', `${sanitizedTitle}.png`);
+    link.rel = "noopener";
+    link.target = "_blank";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Delay revoking to ensure download starts properly
+    setTimeout(() => window.URL.revokeObjectURL(blobUrl), 100);
+  } catch (err) {
+    alert("Image download failed.");
+    console.error(err);
+  }
+};
 
   return (
     <>
@@ -169,40 +159,19 @@ const Portfolio = () => {
         id="portfolio"
         className="relative py-20 min-h-screen text-white overflow-hidden bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950"
       >
-        {/* 3D Animated Background */}
-        <div className="absolute inset-0 z-0">
-          <Container3DBackground 
-            opacity={0.7}
-            particleCount={30}
-            lineCount={50}
-            animationSpeed={0.6}
-            colors={{
-              primary: 0x22d3ee,      // Cyan
-              secondary: 0x8b5cf6,    // Purple
-              accent: 0x3b82f6,       // Blue
-              tertiary: 0x06b6d4,     // Light Blue
-              quaternary: 0x10b981,   // Green
-              quinary: 0xf59e0b       // Orange
-            }}
-            gradient="transparent"
-            mouseInteraction={true}
-            className="about-bg"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 backdrop-blur-[2px] z-[1]" />
-
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           {/* HEADER */}
           <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center animate-bounce shadow-lg">
-                  <span className="text-3xl">💼</span>
-                </div>
                 <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-30 animate-pulse" />
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
-                My Portfolio
+                <TextScroll
+                  className="font-display text-center text-4xl font-semibold tracking-tighter text-black dark:text-white md:text-7xl md:leading-[5rem]"
+                  text="💼 🖼️ My Portfolio Project 🖼️ 💼"
+                  default_velocity={5}
+                />
               </h2>
             </div>
             <div className="relative backdrop-blur-xl bg-white/10 p-8 rounded-3xl border border-white/30 shadow-2xl max-w-3xl mx-auto">
@@ -252,16 +221,9 @@ const Portfolio = () => {
                       <option value="title-desc">🔠 Title (Z–A)</option>
                     </select>
                   </div>
-                  {/* EXPORT BUTTON */}
-                  <button
-                    onClick={exportToPDF}
-                    className="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105"
-                  >
-                    <FaFileExport /> Export
-                  </button>
                   {/* MOBILE FILTER BUTTON */}
                   <button
-                    className="lg:hidden flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105"
+                    className="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105"
                     onClick={() => setMobileFiltersOpen(true)}
                   >
                     <FaFilter /> Filters
@@ -378,22 +340,6 @@ const Portfolio = () => {
                             className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                          {/* Like Button */}
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              toggleLike(item.id);
-                            }}
-                            className="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                          >
-                            <FaHeart
-                              className={`text-lg transition-all duration-300 ${
-                                likedProjects.has(item.id)
-                                  ? "text-red-500 scale-110"
-                                  : "text-white/70 hover:text-red-400"
-                              }`}
-                            />
-                          </button>
                         </div>
                         <div className="p-6">
                           <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
@@ -569,45 +515,47 @@ const Portfolio = () => {
             </div>
           )}
         </div>
-        {/* STYLES */}
-        <style jsx>{`
-          @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-gradient { background-size: 400% 400%; animation: gradient 3s ease infinite; }
-          .backdrop-blur-xl { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
-          .backdrop-blur-lg { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-          ::-webkit-scrollbar { width: 8px; }
-          ::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 4px; }
-          ::-webkit-scrollbar-thumb { background: linear-gradient(45deg,#22d3ee,#3b82f6); border-radius: 4px; }
-          ::-webkit-scrollbar-thumb:hover { background: linear-gradient(45deg,#06b6d4,#2563eb); }
-          select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
-          }
-          select option { background-color: #1f2937; color: white; }
-          .group:hover .animate-bounce { animation-duration: 0.5s; }
-          .group:hover .animate-pulse { animation-duration: 1s; }
-          @keyframes spin { to { transform: rotate(360deg); } }
-          .animate-spin { animation: spin 1s linear infinite; }
-          .mix-blend-screen { mix-blend-mode: screen; }
-          input:focus, select:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(34,211,238,0.5);
-          }
-          @media (max-width: 768px) {
-            .text-5xl { font-size: 2.5rem; }
-            .lg\:text-6xl { font-size: 3rem; }
-            .text-xl { font-size: 1.125rem; }
-            .lg\:text-2xl { font-size: 1.25rem; }
-          }
-        `}
-        </style>
+        <div className="items-between m-auto mt-40 flex max-w-5xl flex-wrap justify-between gap-5">
+        <MaskedDiv maskType="type-1" size={0.45} className="my-4">
+  <img
+    src={img1}
+    alt="Descriptive alt text"
+    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover rounded-lg"
+  />
+</MaskedDiv>
+<MaskedDiv maskType="type-1" className="rotate-180">
+  <img
+    src={img9}
+    alt="Descriptive alt text"
+    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
+  />
+</MaskedDiv>
+
+<MaskedDiv maskType="type-3" className="my-4">
+  <img
+    src={img8}
+    alt="Descriptive alt text"
+    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
+  />
+</MaskedDiv>
+
+<MaskedDiv maskType="type-4" className="my-4">
+  <img
+    src={img5}
+    alt="Descriptive alt text"
+    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
+  />
+</MaskedDiv>
+
+<MaskedDiv maskType="type-2" className="my-4">
+  <img
+    src={img11}
+    alt="Descriptive alt text"
+    className="cursor-pointer transition-all duration-300 hover:scale-105 w-full h-auto object-cover"
+  />
+</MaskedDiv>
+
+        </div>
       </section>
     </>
   );

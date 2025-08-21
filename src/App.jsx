@@ -9,7 +9,7 @@ import Testimonials from './pages/Testimonials';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import Footer from './pages/Footer';
-import NotFound from './pages/NotFound'; // ✅ Import 404 component
+import NotFound from './pages/NotFound'; 
 
 const App = () => {
   return (
@@ -26,11 +26,13 @@ const App = () => {
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/Footer" element={<Footer />} />
-            <Route path="*" element={<NotFound />} /> {/* ✅ Catch-all route */}
+            <Route path="*" element={<NotFound />} /> 
           </Routes>
         </main>
       </div>
+       
     </Router>
+    
   );
 };
 

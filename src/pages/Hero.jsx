@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  FaGithub,
-  FaLinkedin,
-  FaInstagram,
-  FaRocket,
-  FaCode,
-  FaDesktop,
-} from 'react-icons/fa';
+import {FaGithub,FaLinkedin,FaInstagram,FaRocket,FaCode,FaDesktop,} from 'react-icons/fa';
 import heroImg from '../assets/portfolio/hero1.webp';
 import About from './About';
 import Portfolio from './Portfolio';
@@ -95,17 +88,6 @@ const Hero = () => {
         id="hero"
         className=" mt-[5rem] relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950 text-white overflow-hidden"
       >
-        {/* Enhanced background effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 backdrop-blur-3xl" />
-        
-        {/* Animated background grid */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent animate-pulse" 
-               style={{
-                 backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(34, 211, 238, 0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(156, 39, 176, 0.1) 0%, transparent 50%)',
-                 animation: 'float 6s ease-in-out infinite'
-               }} />
-        </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-16">
           {/* Left: Enhanced Text Section */}
@@ -212,23 +194,23 @@ const Hero = () => {
             <div className="flex flex-wrap gap-6">
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-xl blur opacity-100 group-hover:opacity-100 transition duration-300 animate-pulse" />
-                <button className="relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center gap-3">
+                <a href="/portfolio" className="relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg rounded-xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 flex items-center gap-3">
                   <FaRocket className="text-xl animate-bounce" />
                   View Portfolio
-                </button>
+                </a>
               </div>
 
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-400 to-pink-600 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                <button className="relative px-10 py-5 bg-white/10 backdrop-blur-lg border-2 border-white/30 text-white font-bold text-lg rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:bg-white/20 flex items-center gap-3">
+                <a href="/contact" className="relative px-10 py-5 bg-white/10 backdrop-blur-lg border-2 border-white/30 text-white font-bold text-lg rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 hover:bg-white/20 flex items-center gap-3">
                   <FaDesktop className="text-xl animate-pulse" />
                   Get In Touch
-                </button>
+                </a>
               </div>
             </div>
 
             {/* Enhanced Skills Pills */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mt-6">
               {[ 'HTML/CSS' ,'JavaScript','React'].map((skill, idx) => (
                 <div key={idx} className="group relative">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-0 group-hover:opacity-75 transition duration-300" />
@@ -303,49 +285,6 @@ const Hero = () => {
       <Testimonials/>
       <Contact />
       <Footer/>
-
-      <style jsx>{`
-        @keyframes gradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        
-        .animate-gradient {
-          background-size: 400% 400%;
-          animation: gradient 3s ease infinite;
-        }
-        
-        .backdrop-blur-xl {
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-        }
-        
-        .backdrop-blur-lg {
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-        }
-        
-        .backdrop-blur-3xl {
-          backdrop-filter: blur(64px);
-          -webkit-backdrop-filter: blur(64px);
-        }
-      `}</style>
     </>
   );
 };
