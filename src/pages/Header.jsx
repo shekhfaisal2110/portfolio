@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {Home, User, Briefcase, Settings, Mail, Quote, FileText, Menu, X, ExternalLink,} from "lucide-react";
 import logoImg from '../assets/logo/icon.jpg';
 import ExpandedTabs from "../ui/ExpandedTabs"; 
-
 // Utility function for class merging
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 

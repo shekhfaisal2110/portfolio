@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
+    "@splinetool/viewer": "^1.10.48",
     "axios": "^1.11.0",
     "clsx": "^2.1.1",
     "firebase": "^11.9.1",
