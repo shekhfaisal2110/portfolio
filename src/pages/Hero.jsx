@@ -6,6 +6,15 @@ import {
   FaRocket,
   FaDesktop,
 } from "react-icons/fa";
+import {
+  FaHtml5,
+  FaCss3Alt,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaGitAlt,
+} from "react-icons/fa";
+import heroImg from "../assets/portfolio/hero1.webp";
 import About from "./About";
 import Portfolio from "./Portfolio";
 import Services from "./Services";
@@ -14,23 +23,23 @@ import Resume from "./Resume";
 import Testimonials from "./Testimonials";
 import Footer from "./Footer";
 import Header from "./Header";
-import RobotAnimation from "../ui/RobotAnimation";
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
 
-  // TypeAnimation Component
+  // Enhanced TypeAnimation component
   const TypeAnimation = ({ sequence, wrapper, speed, repeat, className }) => {
     const [currentText, setCurrentText] = useState("");
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-      const texts = sequence.filter((_, i) => i % 2 === 0);
-      const delays = sequence.filter((_, i) => i % 2 === 1);
+      const textSequence = sequence.filter((item, index) => index % 2 === 0);
+      const delays = sequence.filter((item, index) => index % 2 === 1);
+
       let timeout;
-      const currentFullText = texts[currentIndex] || "";
+      const currentFullText = textSequence[currentIndex] || "";
 
       if (!isDeleting) {
         if (currentText.length < currentFullText.length) {
@@ -38,7 +47,9 @@ const Hero = () => {
             setCurrentText(currentFullText.slice(0, currentText.length + 1));
           }, speed);
         } else {
-          timeout = setTimeout(() => setIsDeleting(true), delays[currentIndex] || 2000);
+          timeout = setTimeout(() => {
+            setIsDeleting(true);
+          }, delays[currentIndex] || 2000);
         }
       } else {
         if (currentText.length > 0) {
@@ -47,7 +58,7 @@ const Hero = () => {
           }, speed / 2);
         } else {
           setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % texts.length);
+          setCurrentIndex((prev) => (prev + 1) % textSequence.length);
         }
       }
 
@@ -57,15 +68,17 @@ const Hero = () => {
     return React.createElement(wrapper, { className }, currentText);
   };
 
-  // Mouse Particle Trail Effect
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
     window.addEventListener("mousemove", handleMouseMove);
     setIsVisible(true);
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const ParticleTrail = () => (
@@ -74,8 +87,7 @@ const Hero = () => {
       style={{
         left: mousePosition.x - 8,
         top: mousePosition.y - 8,
-        boxShadow:
-          "0 0 20px rgba(34,211,238,0.8), 0 0 40px rgba(34,211,238,0.4)",
+        boxShadow: "0 0 20px rgba(34, 211, 238, 0.8), 0 0 40px rgba(34, 211, 238, 0.4)",
         filter: "blur(1px)",
       }}
     />
@@ -85,39 +97,14 @@ const Hero = () => {
     <>
       <Header />
       <ParticleTrail />
-
-      {/* ================= HERO SECTION ================= */}
       <section
         id="hero"
         className="mt-[5rem] relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950 text-white overflow-hidden"
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row-reverse items-center justify-between gap-16">
-          {/* Right on large: RobotAnimation */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-16">
+          {/* Left: Enhanced Text Section */}
           <div
-            className={`lg:w-1/2 relative w-full max-w-xl mx-auto transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            <RobotAnimation />
-
-            {/* Floating colored balls */}
-            <div className="absolute top-10 left-10 w-6 h-6 bg-cyan-400 rounded-full animate-ping opacity-60
-                            sm:top-10 sm:left-10
-                            xs:top-6 xs:left-6" />
-            <div className="absolute bottom-10 right-10 w-8 h-8 bg-purple-400 rounded-full animate-pulse opacity-60
-                            sm:bottom-10 sm:right-10
-                            xs:bottom-6 xs:right-6" />
-            <div className="absolute top-1/2 left-6 w-4 h-4 bg-blue-400 rounded-full animate-bounce opacity-60
-                            sm:top-1/2 sm:left-6
-                            xs:top-1/3 xs:left-4" />
-            <div className="absolute bottom-1/4 left-1/4 w-5 h-5 bg-pink-400 rounded-full animate-pulse opacity-60
-                            sm:bottom-1/4 sm:left-1/4
-                            xs:bottom-1/3 xs:left-1/5" />
-          </div>
-
-          {/* Left on large: Text Section */}
-          <div
-            className={`lg:w-1/2 w-full transition-all duration-1000 ${
+            className={`lg:w-1/2 transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
@@ -172,6 +159,7 @@ const Hero = () => {
               </div>
             </div>
 
+            {/* Enhanced Social Icons */}
             <div className="flex gap-6 mb-10">
               {[
                 {
@@ -211,6 +199,7 @@ const Hero = () => {
               ))}
             </div>
 
+            {/* Enhanced CTA Buttons */}
             <div className="flex flex-wrap gap-6">
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-xl blur opacity-100 group-hover:opacity-100 transition duration-300 animate-pulse" />
@@ -233,6 +222,7 @@ const Hero = () => {
               </div>
             </div>
 
+            {/* Enhanced Skills Pills */}
             <div className="flex flex-wrap gap-3 mt-6">
               {["HTML/CSS", "JavaScript", "React"].map((skill, idx) => (
                 <div key={idx} className="group relative">
@@ -244,9 +234,63 @@ const Hero = () => {
               ))}
             </div>
           </div>
+
+          {/* Right: Hero Image Section */}
+          <div
+  className={`lg:w-1/2 relative w-full max-w-xl mx-auto transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl transform rounded-3xl border border-white/20 shadow-xl overflow-hidden ${
+    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+  }`}
+>
+  {/* Skill Icons Bar */}
+  <div className="absolute top-3 left-1/2 transform -translate-x-1/2 flex gap-6 bg-black bg-opacity-30 backdrop-blur-md rounded-full px-6 py-2 shadow-lg">
+    {[FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt].map(
+      (Icon, index) => (
+        <div
+          key={index}
+          className="text-white text-3xl animate-bounce hover:text-cyan-400 transition-colors duration-300 cursor-pointer"
+          style={{ animationDelay: `${index * 150}ms` }}
+          title={
+            {
+              0: "HTML5",
+              1: "CSS3",
+              2: "JavaScript",
+              3: "React",
+              4: "Node.js",
+              5: "Git",
+            }[index]
+          }
+        >
+          <Icon />
+        </div>
+      )
+    )}
+  </div>
+
+  <img
+    src={heroImg}
+    alt="Hero"
+    className="w-full h-auto rounded-3xl"
+    loading="lazy"
+    draggable={false}
+    style={{ userSelect: "none" }}
+  />
+<div className="absolute top-10 left-10 w-6 h-6 bg-cyan-400 rounded-full animate-ping opacity-60
+                            sm:top-10 sm:left-10
+                            xs:top-6 xs:left-6" />
+            <div className="absolute bottom-10 right-10 w-8 h-8 bg-purple-400 rounded-full animate-pulse opacity-60
+                            sm:bottom-10 sm:right-10
+                            xs:bottom-6 xs:right-6" />
+            <div className="absolute top-1/2 left-6 w-4 h-4 bg-blue-400 rounded-full animate-bounce opacity-60
+                            sm:top-1/2 sm:left-6
+                            xs:top-1/3 xs:left-4" />
+            <div className="absolute bottom-1/4 left-1/4 w-5 h-5 bg-pink-400 rounded-full animate-pulse opacity-60
+                            sm:bottom-1/4 sm:left-1/4
+                            xs:bottom-1/3 xs:left-1/5" />
+  
+</div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Enhanced Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="relative">
             <div className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center">
