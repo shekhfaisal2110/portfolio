@@ -74,7 +74,7 @@ const Contact = () => {
     setLoading(true);
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbyLodXy123abcxyz/exec", // Replace with your URL
+        "https://script.google.com/macros/s/AKfycbxCVGVy1kfOYw3AgbUZi9fUA4eU0WhZXF5Oah4ur_6qCfBGby4tVo0fFnVV2BcjQ3AT5w/exec", // Replace with your URL
         {
           method: "POST",
           mode: "no-cors",
@@ -122,7 +122,7 @@ const Contact = () => {
                 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient"
               >
                 <TextScroll
-                  className="font-display text-center text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-black dark:text-white leading-tight"
+                  className="font-display text-center text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight text-white leading-tight"
                   text="💼 📧 Contact Me 📧 💼"
                   default_velocity={5}
                 />
