@@ -13,9 +13,12 @@
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
     "@splinetool/viewer": "^1.10.48",
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/react": "^3.0.0",
     "axios": "^1.11.0",
     "clsx": "^2.1.1",
     "firebase": "^11.9.1",
+    "framer-motion": "^12.23.12",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
