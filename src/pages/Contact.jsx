@@ -74,7 +74,7 @@ const Contact = () => {
     setLoading(true);
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbxCVGVy1kfOYw3AgbUZi9fUA4eU0WhZXF5Oah4ur_6qCfBGby4tVo0fFnVV2BcjQ3AT5w/exec", // Replace with your URL
+        "https://script.google.com/macros/s/AKfycbxCVGVy1kfOYw3AgbUZi9fUA4eU0WhZXF5Oah4ur_6qCfBGby4tVo0fFnVV2BcjQ3AT5w/exec", 
         {
           method: "POST",
           mode: "no-cors",

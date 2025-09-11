@@ -13,8 +13,6 @@
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
     "@splinetool/viewer": "^1.10.48",
-    "@tsparticles/engine": "^3.9.1",
-    "@tsparticles/react": "^3.0.0",
     "axios": "^1.11.0",
     "clsx": "^2.1.1",
     "firebase": "^11.9.1",
@@ -33,10 +31,12 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.2",
     "react-toastify": "^11.0.5",
+    "react-tsparticles": "^2.12.2",
     "react-type-animation": "^3.2.0",
     "recharts": "^3.1.0",
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
+    "three": "^0.178.0",
     "tsparticles": "^3.8.1",
     "usehooks-ts": "^3.1.1"
   },
