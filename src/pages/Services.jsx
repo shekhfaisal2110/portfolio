@@ -139,7 +139,7 @@ const Services = () => {
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
                 <TextScroll
-                  className="font-display text-center text-4xl font-semibold tracking-tighter text-black dark:text-white md:text-7xl md:leading-[5rem]"
+                  className="font-display text-center text-4xl font-semibold tracking-tighter text-white md:text-7xl md:leading-[5rem]"
                   text="💼 🛠️ Services & Expertise 🛠️ 💼"
                   default_velocity={5}
                 />
@@ -244,7 +244,7 @@ const Services = () => {
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
                 <TextScroll
-                  className="font-display text-center text-4xl font-semibold tracking-tighter text-black dark:text-white md:text-7xl md:leading-[5rem]"
+                  className="font-display text-center text-4xl font-semibold tracking-tighter xt-white md:text-7xl md:leading-[5rem]"
                   text="💼 🖥️ Technical Skills 🖥️ 💼"
                   default_velocity={5}
                 />
