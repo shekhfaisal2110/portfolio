@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {FaCalendarAlt,FaPhoneAlt,FaMapMarkerAlt,FaGlobe,FaUser,FaGraduationCap,FaEnvelope,FaBriefcase,FaCode,FaRocket,} from "react-icons/fa";
+import {
+  FaCalendarAlt,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaGlobe,
+  FaUser,
+  FaGraduationCap,
+  FaEnvelope,
+  FaBriefcase,
+  FaCode,
+  FaRocket,
+} from "react-icons/fa";
 import myImg from "../assets/portfolio/my_image.jpeg";
 import Header from "./Header";
 import TextScroll from "../ui/text-scroll";
@@ -9,6 +20,16 @@ const About = () => {
   const [age, setAge] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // <-- New loading state
+
+  // Simulate loading for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const birthDate = new Date("2005-09-26");
@@ -46,6 +67,86 @@ const About = () => {
     />
   );
 
+  // Skeleton Loader UI
+  const SkeletonLoader = () => (
+    <section
+      id="about"
+      className="relative min-h-screen py-20 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 backdrop-blur-sm z-1" />
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-6">
+        {/* Left: Image Skeleton */}
+        <div className="flex justify-center">
+          <div className="relative max-w-xs sm:max-w-sm w-full">
+            <div className="bg-gray-800/50 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/20 animate-pulse">
+              <div className="aspect-square bg-gray-700 rounded animate-pulse w-full"></div>
+
+              {/* Decor placeholders */}
+              <div className="absolute -top-6 -left-6 w-12 h-12 bg-gray-600 rounded-full animate-pulse"></div>
+              <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-gray-600 rounded-full animate-pulse"></div>
+              <div className="absolute top-1/2 -right-10 w-8 h-8 bg-gray-600 rounded-full animate-pulse"></div>
+              <div className="absolute bottom-1/4 -left-8 w-10 h-10 bg-gray-600 rounded-full animate-pulse"></div>
+
+              {/* Hire badge skeleton */}
+              <div className="absolute -top-4 -right-4 bg-gray-700 px-4 py-2 rounded-full text-sm animate-pulse w-40"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Content Skeleton */}
+        <div className="space-y-6">
+          {/* Title Skeleton */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="h-12 w-80 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse"></div>
+          </div>
+
+          {/* Description Cards */}
+          <div className="bg-white/10 backdrop-blur-xl p-6 rounded-3xl border border-white/30 animate-pulse h-24"></div>
+          <div className="bg-white/10 backdrop-blur-xl p-6 rounded-3xl border border-white/30 animate-pulse h-24"></div>
+
+          {/* Info Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white/15 backdrop-blur-lg p-4 rounded-lg border border-white/30 animate-pulse h-20"></div>
+            ))}
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white/15 backdrop-blur-lg p-4 rounded-lg border border-white/30 animate-pulse h-20"></div>
+            ))}
+          </div>
+
+          {/* Highlights */}
+          <div className="space-y-4">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="bg-white/15 backdrop-blur-lg p-4 rounded-lg border border-white/30 animate-pulse h-16"></div>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-6 mt-8">
+            <div className="w-48 h-14 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 rounded-xl animate-pulse"></div>
+            <div className="w-48 h-14 bg-white/10 border border-white/30 rounded-xl animate-pulse"></div>
+          </div>
+
+          {/* Skills Pills */}
+          <div className="flex flex-wrap gap-3 mt-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="w-32 h-10 bg-white/10 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  if (isLoading) {
+    return (
+      <>
+        <Header />
+        <SkeletonLoader />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -53,12 +154,12 @@ const About = () => {
       <section
         id="about"
         aria-labelledby="about-title"
-       className="relative min-h-screen py-20 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden"
+        className="relative min-h-screen py-20 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden"
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 backdrop-blur-sm z-1" />
 
-        <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-6">
           {/* Left Image Section */}
           <div
             className={`flex justify-center transition-all duration-1000 ${
@@ -68,16 +169,14 @@ const About = () => {
             <div className="relative group max-w-xs sm:max-w-sm">
               <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition duration-1000 animate-pulse" />
               <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/30 shadow-2xl">
-  
-              <MaskedDiv maskType="type-1" size={0.45} className="my-4">
-                <img
-                  src={myImg} 
-                  alt="Masked content"
-                  className="cursor-pointer transition-all duration-300 hover:scale-105 rounded"
-                  loading="lazy"
-                />
-              </MaskedDiv>
-
+                <MaskedDiv maskType="type-1" size={0.45} className="my-4">
+                  <img
+                    src={myImg}
+                    alt="Masked content"
+                    className="cursor-pointer transition-all duration-300 hover:scale-105 rounded"
+                    loading="lazy"
+                  />
+                </MaskedDiv>
 
                 {/* Floating decor */}
                 <div className="absolute -top-6 -left-6 w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-bounce shadow-lg flex items-center justify-center">
@@ -171,7 +270,7 @@ const About = () => {
                           <strong className="text-white whitespace-nowrap">{item.label}:</strong>
                           {item.href ? (
                             <a
-                              href={item.href}
+                              href={item.href.trim()}
                               className="ml-2 text-cyan-400 hover:text-cyan-300 hover:underline break-words inline-block max-w-full transition-colors duration-300"
                               target="_blank"
                               rel="noopener noreferrer"
@@ -190,7 +289,7 @@ const About = () => {
 
               <div className="space-y-4">
                 {[
-                  { icon: FaUser, label: "Age", value: age ?? "Loading...", color: "from-cyan-500 to-blue-600" },
+                  { icon: FaUser, label: "Age", value: age ?? "Calculating...", color: "from-cyan-500 to-blue-600" },
                   { icon: FaGraduationCap, label: "Degree", value: "BCA (Pursuing)", color: "from-purple-500 to-pink-600" },
                   { icon: FaEnvelope, label: "Email", value: "shekhfaisal.2110@gmail.com", color: "from-yellow-500 to-orange-600", href: "mailto:shekhfaisal.2110@gmail.com" },
                   { icon: FaBriefcase, label: "Freelance", value: "Available", color: "from-green-500 to-teal-600" },

@@ -1,7 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
-import {FaCode,FaMobileAlt,FaGamepad,FaDownload,FaExternalLinkAlt,FaReact,FaRobot,FaTimes,FaFilter,FaSearch,FaSort,FaRocket,FaEye,FaLaptopCode,FaPalette} from "react-icons/fa";
+import {
+  FaCode,
+  FaMobileAlt,
+  FaGamepad,
+  FaDownload,
+  FaExternalLinkAlt,
+  FaReact,
+  FaRobot,
+  FaTimes,
+  FaFilter,
+  FaSearch,
+  FaSort,
+  FaRocket,
+  FaEye,
+  FaLaptopCode,
+  FaPalette,
+} from "react-icons/fa";
 import Header from "./Header";
-import mockPortfolioData from "../data/portfolioData"; 
+import mockPortfolioData from "../data/portfolioData";
 import TextScroll from "../ui/text-scroll";
 
 const Portfolio = () => {
@@ -17,38 +33,36 @@ const Portfolio = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [likedProjects, setLikedProjects] = useState(new Set());
+  const [isLoadingPage, setIsLoadingPage] = useState(true); // <-- New page-level loader
 
   const searchRef = useRef(null);
 
-  // Initialize with mock data
+  // Simulate page load for 3.5 seconds
   useEffect(() => {
-    setTimeout(() => {
-      setPortfolioItems(mockPortfolioData); // This will show the projects. Make sure your mockPortfolioData is exported as an array!
-      setLoading(false);
-    }, 1000);
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false);
+    }, 1500); // 3.5 seconds
 
-    // Uncomment to use API instead
-    /*
-    fetch("http://localhost:5000/api/portfolio")
-      .then((res) => res.json())
-      .then((data) => {
-        setPortfolioItems(data);
-        setLoading(false);
-      })
-      .catch((err) => {
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Initialize portfolio data
+  useEffect(() => {
+    if (!isLoadingPage) {
+      setTimeout(() => {
         setPortfolioItems(mockPortfolioData);
         setLoading(false);
-      });
-    */
-  }, []);
+      }, 300); // slight delay after skeleton hides
+    }
+  }, [isLoadingPage]);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     setIsVisible(true);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   useEffect(() => {
@@ -70,14 +84,76 @@ const Portfolio = () => {
       style={{
         left: mousePosition.x - 8,
         top: mousePosition.y - 8,
-        boxShadow: '0 0 20px rgba(34, 211, 238, 0.8), 0 0 40px rgba(34, 211, 238, 0.4)',
-        filter: 'blur(1px)',
+        boxShadow: "0 0 20px rgba(34, 211, 238, 0.8), 0 0 40px rgba(34, 211, 238, 0.4)",
+        filter: "blur(1px)",
       }}
     />
   );
 
+  // Skeleton Loader UI
+  const SkeletonLoader = () => (
+    <section
+      id="portfolio"
+      className="relative py-20 min-h-screen text-white overflow-hidden bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950"
+    >
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header Skeleton */}
+        <div className="text-center mb-16">
+          <div className="h-14 w-96 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse mx-auto mb-8"></div>
+          <div className="relative backdrop-blur-xl bg-white/10 p-8 rounded-3xl border border-white/30 shadow-2xl max-w-3xl mx-auto h-20 animate-pulse"></div>
+        </div>
+
+        {/* Control Panel Skeleton */}
+        <div className="mb-16">
+          <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/30 animate-pulse">
+            <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+              <div className="w-full lg:w-80 h-12 bg-white/15 rounded-xl"></div>
+              <div className="w-48 h-12 bg-white/15 rounded-xl"></div>
+              <div className="w-36 h-12 bg-gradient-to-r from-orange-500/30 to-red-600/30 rounded-xl"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Filters Skeleton */}
+        <div className="hidden lg:flex flex-wrap justify-center gap-4 mb-16">
+          {[...Array(7)].map((_, i) => (
+            <div key={i} className="w-48 h-16 bg-white/15 rounded-xl animate-pulse"></div>
+          ))}
+        </div>
+
+        {/* Project Grid Skeleton */}
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="overflow-hidden rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 h-96 animate-pulse">
+              <div className="w-full h-48 bg-gradient-to-r from-gray-600/50 to-gray-500/50"></div>
+              <div className="p-6 space-y-4">
+                <div className="h-6 bg-gradient-to-r from-gray-500/50 to-gray-400/50 rounded"></div>
+                <div className="h-4 bg-gradient-to-r from-gray-500/50 to-gray-400/50 rounded w-3/4"></div>
+                <div className="flex gap-3">
+                  <div className="h-10 bg-gradient-to-r from-gray-500/50 to-gray-400/50 rounded flex-1"></div>
+                  <div className="h-10 bg-gradient-to-r from-gray-500/50 to-gray-400/50 rounded flex-1"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  // Only show skeleton on initial load
+  if (isLoadingPage) {
+    return (
+      <>
+        <Header />
+        <SkeletonLoader />
+      </>
+    );
+  }
+
+  // Rest of your original logic remains unchanged
   const filters = [
-    { label: "All Projects", value: "all", icon: <FaCode />,  gradient: "from-cyan-500 to-blue-600" },
+    { label: "All Projects", value: "all", icon: <FaCode />, gradient: "from-cyan-500 to-blue-600" },
     { label: "Web Design", value: "web-design", icon: <FaPalette />, gradient: "from-blue-500 to-indigo-600" },
     { label: "Web Development", value: "web-development", icon: <FaLaptopCode />, gradient: "from-green-500 to-cyan-600" },
     { label: "Mobile Apps", value: "mobile-apps", icon: <FaMobileAlt />, gradient: "from-orange-500 to-red-600" },
@@ -97,16 +173,17 @@ const Portfolio = () => {
     return [...items].sort((a, b) => new Date(b.hostedDate) - new Date(a.hostedDate));
   };
 
-  const filteredItems = portfolioItems.filter((item) =>
-    (activeFilter === "all" || item.category === activeFilter) &&
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredItems = portfolioItems.filter(
+    (item) =>
+      (activeFilter === "all" || item.category === activeFilter) &&
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const sortedItems = sortItems(filteredItems);
   const visibleItems = sortedItems.slice(0, visibleCount);
 
   const toggleLike = (projectId) => {
-    setLikedProjects(prev => {
+    setLikedProjects((prev) => {
       const newLiked = new Set(prev);
       if (newLiked.has(projectId)) newLiked.delete(projectId);
       else newLiked.add(projectId);
@@ -115,35 +192,34 @@ const Portfolio = () => {
   };
 
   const sanitizeFilename = (name) => {
-  return name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-};
+    return name.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+  };
 
-const downloadImage = async (url, title) => {
-  try {
-    const response = await fetch(url, { mode: "cors" });
-    if (!response.ok) throw new Error('Network response was not ok');
+  const downloadImage = async (url, title) => {
+    try {
+      const response = await fetch(url, { mode: "cors" });
+      if (!response.ok) throw new Error("Network response was not ok");
 
-    const blob = await response.blob();
-    const blobUrl = window.URL.createObjectURL(blob);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
 
-    const sanitizedTitle = sanitizeFilename(title) || 'download';
-    const link = document.createElement("a");
-    link.href = blobUrl;
-    link.setAttribute('download', `${sanitizedTitle}.png`);
-    link.rel = "noopener";
-    link.target = "_blank";
+      const sanitizedTitle = sanitizeFilename(title) || "download";
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.setAttribute("download", `${sanitizedTitle}.png`);
+      link.rel = "noopener";
+      link.target = "_blank";
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-    // Delay revoking to ensure download starts properly
-    setTimeout(() => window.URL.revokeObjectURL(blobUrl), 100);
-  } catch (err) {
-    alert("Image download failed.");
-    console.error(err);
-  }
-};
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 100);
+    } catch (err) {
+      alert("Image download failed.");
+      console.error(err);
+    }
+  };
 
   return (
     <>
@@ -155,7 +231,11 @@ const downloadImage = async (url, title) => {
       >
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           {/* HEADER */}
-          <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="relative">
                 <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-30 animate-pulse" />
@@ -174,8 +254,13 @@ const downloadImage = async (url, title) => {
               </p>
             </div>
           </div>
+
           {/* CONTROL PANEL */}
-          <div className={`transition-all duration-1000 delay-300 mb-16 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`transition-all duration-1000 delay-300 mb-16 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
             <div className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-700" />
               <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/30 shadow-2xl">
@@ -226,8 +311,13 @@ const downloadImage = async (url, title) => {
               </div>
             </div>
           </div>
+
           {/* DESKTOP FILTERS */}
-          <div className={`hidden lg:flex flex-wrap justify-center gap-4 mb-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div
+            className={`hidden lg:flex flex-wrap justify-center gap-4 mb-16 transition-all duration-1000 delay-500 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
             {filters.map((filter, index) => (
               <button
                 key={filter.value}
@@ -243,14 +333,21 @@ const downloadImage = async (url, title) => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-full ${activeFilter === filter.value ? 'bg-white/20' : `bg-gradient-to-r ${filter.gradient}`} shadow-lg`}>
+                  <div
+                    className={`p-2 rounded-full ${
+                      activeFilter === filter.value ? "bg-white/20" : `bg-gradient-to-r ${filter.gradient}`
+                    } shadow-lg`}
+                  >
                     <span className="text-sm text-white">{filter.icon}</span>
                   </div>
-                  <span>{filter.label} ({countByCategory(filter.value)})</span>
+                  <span>
+                    {filter.label} ({countByCategory(filter.value)})
+                  </span>
                 </div>
               </button>
             ))}
           </div>
+
           {/* MOBILE FILTER MODAL */}
           {mobileFiltersOpen && (
             <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
@@ -282,10 +379,16 @@ const downloadImage = async (url, title) => {
                             : "bg-white/15 hover:bg-white/25 border border-white/30"
                         }`}
                       >
-                        <div className={`p-2 rounded-full ${activeFilter === filter.value ? 'bg-white/20' : `bg-gradient-to-r ${filter.gradient}`}`}>
+                        <div
+                          className={`p-2 rounded-full ${
+                            activeFilter === filter.value ? "bg-white/20" : `bg-gradient-to-r ${filter.gradient}`
+                          }`}
+                        >
                           <span className="text-white text-sm">{filter.icon}</span>
                         </div>
-                        <span>{filter.label} ({countByCategory(filter.value)})</span>
+                        <span>
+                          {filter.label} ({countByCategory(filter.value)})
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -293,11 +396,15 @@ const downloadImage = async (url, title) => {
               </div>
             </div>
           )}
+
           {/* PORTFOLIO GRID */}
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             {loading
               ? [...Array(6)].map((_, i) => (
-                  <div key={i} className="overflow-hidden rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 h-96 animate-pulse">
+                  <div
+                    key={i}
+                    className="overflow-hidden rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 h-96 animate-pulse"
+                  >
                     <div className="w-full h-48 bg-gradient-to-r from-gray-600/50 to-gray-500/50"></div>
                     <div className="p-6 space-y-4">
                       <div className="h-6 bg-gradient-to-r from-gray-500/50 to-gray-400/50 rounded"></div>
@@ -313,7 +420,7 @@ const downloadImage = async (url, title) => {
                   <div
                     key={item.id}
                     className={`transition-all duration-1000 ${
-                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                     }`}
                     style={{ animationDelay: `${(index + 7) * 100}ms` }}
                   >
@@ -364,9 +471,7 @@ const downloadImage = async (url, title) => {
                         {/* Hover Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center rounded-2xl">
                           <div className="text-center p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <p className="text-white text-lg mb-4 font-semibold">
-                              Click to view details
-                            </p>
+                            <p className="text-white text-lg mb-4 font-semibold">Click to view details</p>
                             <div className="w-16 h-16 border-2 border-white/50 rounded-full flex items-center justify-center mx-auto animate-pulse">
                               <FaEye className="text-white text-xl" />
                             </div>
@@ -377,6 +482,7 @@ const downloadImage = async (url, title) => {
                   </div>
                 ))}
           </div>
+
           {/* SHOW MORE BUTTON */}
           {!loading && visibleCount < filteredItems.length && (
             <div className="text-center mt-16">
@@ -409,21 +515,22 @@ const downloadImage = async (url, title) => {
               </button>
             </div>
           )}
+
           {/* NO RESULTS STATE */}
           {!loading && filteredItems.length === 0 && (
-            <div className={`text-center py-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div
+              className={`text-center py-20 transition-all duration-1000 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+            >
               <div className="relative max-w-md mx-auto">
                 <div className="absolute -inset-2 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-3xl blur-xl opacity-30" />
                 <div className="relative bg-white/15 backdrop-blur-xl rounded-3xl p-8 border border-white/30">
                   <div className="w-24 h-24 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full flex items-center justify-center mx-auto mb-6">
                     <FaSearch className="text-3xl text-gray-300" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-200 mb-4">
-                    No Projects Found
-                  </h3>
-                  <p className="text-gray-300 mb-8">
-                    Try adjusting your search terms or filter selection.
-                  </p>
+                  <h3 className="text-2xl font-bold text-gray-200 mb-4">No Projects Found</h3>
+                  <p className="text-gray-300 mb-8">Try adjusting your search terms or filter selection.</p>
                   <button
                     onClick={() => {
                       setSearchQuery("");
@@ -437,6 +544,7 @@ const downloadImage = async (url, title) => {
               </div>
             </div>
           )}
+
           {/* PROJECT MODAL */}
           {selectedItem && (
             <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
@@ -469,18 +577,13 @@ const downloadImage = async (url, title) => {
                         <div className="flex items-center gap-3">
                           <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-pulse"></div>
                           <span className="text-gray-200">
-                            <span className="font-medium text-white">
-                              Category:
-                            </span>{" "}
-                            {selectedItem.category.replace("-", " ")}
+                            <span className="font-medium text-white">Category:</span> {selectedItem.category.replace("-", " ")}
                           </span>
                         </div>
                         <div className="flex items-center gap-3">
                           <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
                           <span className="text-gray-200">
-                            <span className="font-medium text-white">
-                              Launch Date:
-                            </span>{" "}
+                            <span className="font-medium text-white">Launch Date:</span>{" "}
                             {new Date(selectedItem.hostedDate).toLocaleDateString()}
                           </span>
                         </div>

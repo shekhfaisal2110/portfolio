@@ -12,28 +12,21 @@ import {
 } from 'react-icons/fa';
 import ResumePdf from '../pages/Shekh_Faisal(resume).pdf';
 import Header from './Header';
-
 import TextScroll from '../ui/text-scroll';
 
+// Reusable TimelineItem (defined once)
 const TimelineItem = ({ title, date, desc, icon, gradient, hoverGradient }) => {
   return (
-    <div className="relative pl-16 mb-8 group/timeline max-w-lg mx-auto sm:max-w-none">
-      {/* Dot */}
+    <div className="relative pl-16 mb-8 group">
       <div className="absolute left-0 top-2">
-        <div className={`absolute -inset-2 bg-gradient-to-r ${hoverGradient} rounded-full blur opacity-20 group-hover:opacity-60 transition duration-500`} />
+        <div className={`absolute -inset-2 bg-gradient-to-r ${hoverGradient} rounded-full blur opacity-20 group-hover:opacity-60 transition duration-500`}></div>
         <div className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/10 bg-gradient-to-r ${gradient} text-white text-2xl transition-transform group-hover:scale-105`}>
           {icon}
         </div>
       </div>
-
-      {/* Line */}
-      <div className="absolute left-5 top-14 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent opacity-50" />
-
-      {/* Content */}
-      <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-lg p-6 hover:shadow-cyan-600 transition-shadow duration-300 group hover:border-white/40 hover:bg-white/20">
-        <h4 className={`text-xl font-semibold bg-gradient-to-r ${gradient} bg-clip-text text-transparent mb-3`}>
-          {title}
-        </h4>
+      <div className="absolute left-5 top-14 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent opacity-50"></div>
+      <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-lg p-6 hover:shadow-cyan-600 transition-shadow duration-300 group-hover:border-white/40 group-hover:bg-white/20">
+        <h4 className={`text-xl font-semibold bg-gradient-to-r ${gradient} bg-clip-text text-transparent mb-3`}>{title}</h4>
         <div className="flex items-center gap-2 mb-4">
           <FaCalendarAlt className="text-cyan-400" />
           <span className="text-cyan-400 font-medium bg-cyan-700/20 px-3 py-1 rounded-full text-sm">{date}</span>
@@ -44,9 +37,72 @@ const TimelineItem = ({ title, date, desc, icon, gradient, hoverGradient }) => {
   );
 };
 
+const TimelineSection = ({ title, items, icon }) => (
+  <>
+    <h2
+      id={`${title.toLowerCase()}-title`}
+      className="text-4xl font-extrabold mb-10 flex items-center gap-4 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent"
+    >
+      {icon}
+      {title}
+    </h2>
+    <div>
+      {items.map((item, idx) => (
+        <TimelineItem key={idx} {...item} />
+      ))}
+    </div>
+  </>
+);
+
+const SkillBadge = ({ skill }) => {
+  const gradients = {
+    'HTML/CSS': 'from-orange-400 to-red-500',
+    'JavaScript': 'from-yellow-400 to-orange-500',
+    'React.js': 'from-cyan-400 to-blue-500',
+    'Responsive Design': 'from-green-400 to-emerald-500',
+    'UI/UX Design': 'from-purple-400 to-pink-500',
+    'Git/GitHub': 'from-gray-400 to-gray-600',
+    'Problem Solving': 'from-indigo-400 to-purple-500',
+    'Team Collaboration': 'from-pink-400 to-rose-500',
+  };
+
+  return (
+    <span
+      className={`relative cursor-default select-none rounded-full px-6 py-2 text-sm font-semibold text-white bg-white/10 backdrop-blur-md border border-white/20 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-400`}
+      style={{
+        backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))`,
+        ['--tw-gradient-from']: `var(--tw-gradient-from-${gradients[skill].split(' ')[0]})`,
+        ['--tw-gradient-to']: `var(--tw-gradient-to-${gradients[skill].split(' ')[1]})`,
+      }}
+    >
+      {skill}
+    </span>
+  );
+};
+
+const CTAButton = ({ href, icon: Icon, colorStart, colorEnd, text }) => (
+  <a
+    href={href}
+    className={`inline-flex items-center gap-3 px-10 py-4 rounded-xl font-bold text-white shadow-lg bg-gradient-to-r from-${colorStart} to-${colorEnd} transition-transform duration-300 hover:scale-105 hover:shadow-${colorStart} focus-visible:outline focus-visible:outline-2 focus-visible:outline-${colorStart}`}
+  >
+    <Icon className="animate-bounce text-lg" />
+    {text}
+  </a>
+);
+
 const Resume = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(true); // <-- New page loader
+
+  // Simulate page load for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false);
+    }, 1500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
@@ -67,6 +123,79 @@ const Resume = () => {
     />
   );
 
+  // Skeleton Loader UI
+  const SkeletonLoader = () => (
+    <section
+      id="resume"
+      className="relative min-h-screen py-20 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden"
+    >
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header Skeleton */}
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <div className="h-14 w-80 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse mx-auto mb-8"></div>
+          <div className="relative backdrop-blur-lg bg-white/10 p-8 rounded-3xl border border-white/20 shadow-2xl max-w-3xl mx-auto h-20 animate-pulse"></div>
+        </div>
+
+        {/* Buttons Skeleton */}
+        <div className="flex flex-wrap justify-center gap-10 mb-16">
+          <div className="w-56 h-14 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 rounded-xl animate-pulse"></div>
+          <div className="w-56 h-14 bg-gradient-to-r from-purple-600/30 to-pink-500/30 rounded-xl animate-pulse"></div>
+        </div>
+
+        {/* Timeline Sections Skeleton */}
+        <div className="grid md:grid-cols-2 gap-16 mb-32">
+          {/* Education */}
+          <div>
+            <div className="h-10 w-48 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded mb-10 animate-pulse"></div>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="relative pl-16 mb-8">
+                <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 rounded-full animate-pulse"></div>
+                <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 h-32 animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+          {/* Experience */}
+          <div>
+            <div className="h-10 w-48 bg-gradient-to-r from-blue-500/20 to-indigo-600/20 rounded mb-10 animate-pulse"></div>
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="relative pl-16 mb-8">
+                <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-r from-blue-500/30 to-indigo-600/30 rounded-full animate-pulse"></div>
+                <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 p-6 h-32 animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Skills Skeleton */}
+        <div className="max-w-4xl mx-auto mb-32 text-center">
+          <div className="h-10 w-48 bg-gradient-to-r from-green-400/20 to-cyan-500/20 rounded mb-8 mx-auto animate-pulse"></div>
+          <div className="flex flex-wrap justify-center gap-4">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="w-32 h-10 bg-white/10 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Buttons Skeleton */}
+        <div className="max-w-4xl mx-auto text-center mb-16 py-8 px-4 flex flex-col sm:flex-row justify-center items-center gap-6">
+          <div className="w-56 h-14 bg-gradient-to-r from-cyan-500/30 to-emerald-600/30 rounded-xl animate-pulse"></div>
+          <div className="w-56 h-14 bg-gradient-to-r from-orange-500/30 to-red-600/30 rounded-xl animate-pulse"></div>
+          <div className="w-56 h-14 bg-gradient-to-r from-pink-500/30 to-purple-600/30 rounded-xl animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+  );
+
+  if (isLoadingPage) {
+    return (
+      <>
+        <Header />
+        <SkeletonLoader />
+      </>
+    );
+  }
+
+  // Data
   const education = [
     {
       title: 'Bachelor of Computer Application',
@@ -144,57 +273,31 @@ const Resume = () => {
       ),
     },
     {
-  title: 'Personal Project Developer',
-  date: '2023 - 2024',
-  icon: <FaCode />,
-  gradient: 'from-orange-500 to-red-600',
-  hoverGradient: 'from-orange-400 to-red-500',
-  desc: (
-    <>
-      Built <strong className="font-semibold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-        UniversalTravels
-      </strong>, a desktop-focused travel website created as part of my first-year project. 
-      Designed with semantic HTML and styled using CSS for a clean, modern look 
-      (optimized primarily for desktop screens).
-      <br />
-      <a 
-        href="https://shekhfaisal2110.github.io/UniversalTravels/" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="text-cyan-400 hover:underline"
-      >
-        View Project
-      </a>
-    </>
-  ),
-},
-
+      title: 'Personal Project Developer',
+      date: '2023 - 2024',
+      icon: <FaCode />,
+      gradient: 'from-orange-500 to-red-600',
+      hoverGradient: 'from-orange-400 to-red-500',
+      desc: (
+        <>
+          Built <strong className="font-semibold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
+            UniversalTravels
+          </strong>, a desktop-focused travel website created as part of my first-year project. 
+          Designed with semantic HTML and styled using CSS for a clean, modern look 
+          (optimized primarily for desktop screens).
+          <br />
+          <a 
+            href="https://shekhfaisal2110.github.io/UniversalTravels/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="text-cyan-400 hover:underline"
+          >
+            View Project
+          </a>
+        </>
+      ),
+    },
   ];
-
-  const TimelineItem = ({ title, date, desc, icon, gradient, hoverGradient }) => {
-    return (
-      <div className="relative pl-16 mb-8 group">
-        {/* Dot */}
-        <div className="absolute left-0 top-2">
-          <div className={`absolute -inset-2 bg-gradient-to-r ${hoverGradient} rounded-full blur opacity-20 group-hover:opacity-60 transition duration-500`}></div>
-          <div className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/10 bg-gradient-to-r ${gradient} text-white text-2xl transition-transform group-hover:scale-105`}>
-            {icon}
-          </div>
-        </div>
-        {/* Line */}
-        <div className="absolute left-5 top-14 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent opacity-50"></div>
-        {/* Content */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-lg p-6 hover:shadow-cyan-600 transition-shadow duration-300 group-hover:border-white/40 group-hover:bg-white/20">
-          <h4 className={`text-xl font-semibold bg-gradient-to-r ${gradient} bg-clip-text text-transparent mb-3`}>{title}</h4>
-          <div className="flex items-center gap-2 mb-4">
-            <FaCalendarAlt className="text-cyan-400" />
-            <span className="text-cyan-400 font-medium bg-cyan-700/20 px-3 py-1 rounded-full text-sm">{date}</span>
-          </div>
-          <div className="text-white text-opacity-75 leading-relaxed">{desc}</div>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <>
@@ -288,68 +391,14 @@ const Resume = () => {
 
           {/* CTA Section */}
           <div className="max-w-4xl mx-auto text-center mb-16 py-8 px-4 flex flex-col sm:flex-row justify-center items-center gap-6">
-  <CTAButton href="/contact" icon={FaRocket} colorStart="cyan-500" colorEnd="emerald-600" text="Let's Work Together" />
-  <CTAButton href="/portfolio" icon={FaExternalLinkAlt} colorStart="orange-500" colorEnd="red-600" text="View My Work" />
-  <CTAButton href="/testimonials" icon={FaHeart} colorStart="pink-500" colorEnd="purple-600" text="Client Reviews" />
-</div>
-
+            <CTAButton href="/contact" icon={FaRocket} colorStart="cyan-500" colorEnd="emerald-600" text="Let's Work Together" />
+            <CTAButton href="/portfolio" icon={FaExternalLinkAlt} colorStart="orange-500" colorEnd="red-600" text="View My Work" />
+            <CTAButton href="/testimonials" icon={FaHeart} colorStart="pink-500" colorEnd="purple-600" text="Client Reviews" />
+          </div>
         </div>
       </section>
     </>
   );
 };
-
-const TimelineSection = ({ title, items, icon }) => (
-  <>
-    <h2
-      id={`${title.toLowerCase()}-title`}
-      className="text-4xl font-extrabold mb-10 flex items-center gap-4 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent"
-    >
-      {icon}
-      {title}
-    </h2>
-    <div>
-      {items.map((item, idx) => (
-        <TimelineItem key={idx} {...item} />
-      ))}
-    </div>
-  </>
-);
-
-const SkillBadge = ({ skill }) => {
-  const gradients = {
-    'HTML/CSS': 'from-orange-400 to-red-500',
-    'JavaScript': 'from-yellow-400 to-orange-500',
-    'React.js': 'from-cyan-400 to-blue-500',
-    'Responsive Design': 'from-green-400 to-emerald-500',
-    'UI/UX Design': 'from-purple-400 to-pink-500',
-    'Git/GitHub': 'from-gray-400 to-gray-600',
-    'Problem Solving': 'from-indigo-400 to-purple-500',
-    'Team Collaboration': 'from-pink-400 to-rose-500',
-  };
-
-  return (
-    <span
-      className={`relative cursor-default select-none rounded-full px-6 py-2 text-sm font-semibold text-white bg-white/10 backdrop-blur-md border border-white/20 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-cyan-400`}
-      style={{
-        backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))`,
-        ['--tw-gradient-from']: `var(--tw-gradient-from-${gradients[skill].split(' ')[0]})`,
-        ['--tw-gradient-to']: `var(--tw-gradient-to-${gradients[skill].split(' ')[1]})`,
-      }}
-    >
-      {skill}
-    </span>
-  );
-};
-
-const CTAButton = ({ href, icon: Icon, colorStart, colorEnd, text }) => (
-  <a
-    href={href}
-    className={`inline-flex items-center gap-3 px-10 py-4 rounded-xl font-bold text-white shadow-lg bg-gradient-to-r from-${colorStart} to-${colorEnd} transition-transform duration-300 hover:scale-105 hover:shadow-${colorStart} focus-visible:outline focus-visible:outline-2 focus-visible:outline-${colorStart}`}
-  >
-    <Icon className="animate-bounce text-lg" />
-    {text}
-  </a>
-);
 
 export default Resume;

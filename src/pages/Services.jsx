@@ -1,5 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import {FaCode,FaMobileAlt,FaPaintBrush,FaTools,FaRocket,FaHeart,} from "react-icons/fa";
+import {
+  FaCode,
+  FaMobileAlt,
+  FaPaintBrush,
+  FaTools,
+  FaRocket,
+  FaHeart,
+} from "react-icons/fa";
 import Header from "./Header";
 import TechIconsGrid from "../components/TechIconsGrid";
 import TextScroll from "../ui/text-scroll";
@@ -14,6 +21,16 @@ const Services = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [skillsInView, setSkillsInView] = useState(new Set());
   const containerRef = useRef(null);
+  const [isLoadingPage, setIsLoadingPage] = useState(true); // <-- New page loader
+
+  // Simulate page load for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false);
+    }, 1500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -32,9 +49,11 @@ const Services = () => {
       { threshold: 0.3 }
     );
 
-    document.querySelectorAll(".skill-card").forEach((el) => {
-      observer.observe(el);
-    });
+    if (!isLoadingPage) {
+      document.querySelectorAll(".skill-card").forEach((el) => {
+        observer.observe(el);
+      });
+    }
 
     window.addEventListener("mousemove", handleMouseMove);
     setIsVisible(true);
@@ -43,9 +62,9 @@ const Services = () => {
       observer.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isLoadingPage]);
 
-  // Enhanced ParticleTrail component matching Hero style
+  // Enhanced ParticleTrail component
   const ParticleTrail = () => (
     <div
       className="fixed w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full pointer-events-none z-50 mix-blend-screen transition-all duration-150 ease-out"
@@ -101,6 +120,67 @@ const Services = () => {
     },
   ];
 
+  // Skeleton Loader UI
+  const SkeletonLoader = () => (
+    <section
+      id="services"
+      className="relative min-h-screen py-20 bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950 text-white overflow-hidden"
+    >
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header Skeleton */}
+        <div className="text-center mb-16">
+          <div className="h-14 w-96 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse mx-auto mb-8"></div>
+          <div className="relative backdrop-blur-lg bg-white/10 p-8 rounded-3xl border border-white/20 shadow-2xl max-w-3xl mx-auto h-20 animate-pulse"></div>
+        </div>
+
+        {/* Service Cards Skeleton */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20 h-80 animate-pulse"></div>
+          ))}
+        </div>
+
+        {/* HoverExpand Placeholder */}
+        <div className="h-64 bg-gradient-to-r from-gray-800/30 to-gray-700/30 rounded-3xl mb-16 animate-pulse"></div>
+
+        {/* Technical Skills Header */}
+        <div className="text-center mb-16">
+          <div className="h-14 w-80 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse mx-auto mb-8"></div>
+        </div>
+
+        {/* TechIconsGrid Skeleton */}
+        <div className="py-16">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {[...Array(12)].map((_, i) => (
+              <div key={i} className="flex flex-col items-center space-y-3">
+                <div className="w-16 h-16 bg-gradient-to-r from-gray-600/30 to-gray-500/30 rounded-full animate-pulse"></div>
+                <div className="h-4 w-16 bg-gray-600/30 rounded animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Buttons Skeleton */}
+        <div className="text-center">
+          <div className="flex flex-wrap justify-center gap-6 mb-12">
+            <div className="w-56 h-14 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 rounded-xl animate-pulse"></div>
+            <div className="w-56 h-14 bg-white/10 border border-white/20 rounded-xl animate-pulse"></div>
+          </div>
+          <div className="max-w-3xl mx-auto h-24 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+  );
+
+  if (isLoadingPage) {
+    return (
+      <>
+        <Header />
+        <SkeletonLoader />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -111,10 +191,7 @@ const Services = () => {
         className="relative min-h-screen py-20 bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950 text-white overflow-hidden"
         aria-labelledby="services-title"
       >
-        {/* Enhanced background effects matching Hero */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 backdrop-blur-3xl" />
-
-        {/* Animated background grid */}
         <div className="absolute inset-0 opacity-20">
           <div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent animate-pulse"
@@ -127,7 +204,7 @@ const Services = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          {/* Enhanced Header matching Hero style */}
+          {/* Enhanced Header */}
           <div
             className={`text-center mb-16 transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -154,20 +231,17 @@ const Services = () => {
             </div>
           </div>
 
-          {/* Enhanced Service Cards Grid */}
+          {/* Service Cards Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
             {services.map((service, i) => (
               <div
                 key={i}
-                className={`group relative transition-all duration-1000 delay-${
-                  (i + 3) * 100
-                }`}
+                className={`group relative transition-all duration-1000 delay-${(i + 3) * 100}`}
               >
                 <div
                   className={`absolute -inset-2 bg-gradient-to-r ${service.gradient} rounded-3xl blur-xl opacity-30 group-hover:opacity-60 transition-all duration-700 animate-pulse`}
                 />
                 <div className="relative bg-white/5 backdrop-blur-xl text-center rounded-3xl p-8 border border-white/20 hover:border-white/40 transform hover:-translate-y-6 hover:scale-[1.02] transition-all duration-700 shadow-2xl hover:shadow-cyan-400/20 overflow-hidden hover:bg-white/10">
-                  {/* Decorative floating elements */}
                   <div
                     className={`absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-r ${service.gradient} rounded-full animate-bounce shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}
                   >
@@ -185,7 +259,6 @@ const Services = () => {
                     className={`absolute bottom-1/4 -left-6 w-8 h-8 bg-gradient-to-r ${service.gradient} rounded-full animate-bounce shadow-lg opacity-60`}
                   />
 
-                  {/* Icon and text */}
                   <div className="relative z-10">
                     <div className="service-icon mb-8 group-hover:scale-125 group-hover:rotate-6 transition-all duration-500">
                       <div className="relative inline-block">
@@ -217,7 +290,6 @@ const Services = () => {
                     />
                   </div>
 
-                  {/* Hover overlay */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${service.bgGradient} opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-3xl pointer-events-none`}
                   />
@@ -232,7 +304,7 @@ const Services = () => {
             imageDetails={services}
           />
 
-          {/* Enhanced Technical Skills Section */}
+          {/* Technical Skills Section */}
           <div
             className={`text-center mb-16 transition-all duration-1000 delay-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -244,7 +316,7 @@ const Services = () => {
               </div>
               <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient">
                 <TextScroll
-                  className="font-display text-center text-4xl font-semibold tracking-tighter xt-white md:text-7xl md:leading-[5rem]"
+                  className="font-display text-center text-4xl font-semibold tracking-tighter text-white md:text-7xl md:leading-[5rem]"
                   text="💼 🖥️ Technical Skills 🖥️ 💼"
                   default_velocity={5}
                 />
@@ -252,12 +324,11 @@ const Services = () => {
             </div>
           </div>
 
-          {/* Enhanced Professional Technical Skills Grid */}
           <div className="py-16">
             <TechIconsGrid />
           </div>
 
-          {/* Enhanced CTA Section */}
+          {/* CTA Section */}
           <div
             className={`text-center transition-all duration-1000 delay-1200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -287,7 +358,6 @@ const Services = () => {
               </div>
             </div>
 
-            {/* Enhanced Additional Info */}
             <div className="mt-12 relative group max-w-3xl mx-auto">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/10 via-blue-500/10 to-purple-600/10 rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-500" />
               <div className="relative backdrop-blur-lg bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-white/20 shadow-lg transition-all duration-300 hover:bg-white/10">

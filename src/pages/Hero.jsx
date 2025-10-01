@@ -27,6 +27,16 @@ import Header from "./Header";
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // <-- New loading state
+
+  // Simulate loading for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Enhanced TypeAnimation component
   const TypeAnimation = ({ sequence, wrapper, speed, repeat, className }) => {
@@ -92,6 +102,64 @@ const Hero = () => {
       }}
     />
   );
+
+  // Skeleton Loader Component
+  const SkeletonLoader = () => (
+    <section className="mt-[5rem] min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950 text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center justify-between gap-16 w-full">
+        {/* Left Skeleton */}
+        <div className="lg:w-1/2 space-y-6">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 rounded-full bg-gray-700 animate-pulse"></div>
+            <div className="space-y-2">
+              <div className="h-8 w-32 bg-gray-700 rounded animate-pulse"></div>
+              <div className="h-5 w-16 bg-gray-700 rounded animate-pulse"></div>
+            </div>
+          </div>
+          <div className="h-12 w-64 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse"></div>
+          <div className="space-y-4">
+            <div className="h-6 w-full bg-gray-700 rounded animate-pulse"></div>
+            <div className="h-6 w-5/6 bg-gray-700 rounded animate-pulse"></div>
+          </div>
+          <div className="h-32 bg-white/5 backdrop-blur-lg rounded-3xl border border-white/10 animate-pulse"></div>
+          <div className="flex gap-4">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="w-16 h-16 rounded-full bg-gray-700 animate-pulse"></div>
+            ))}
+          </div>
+          <div className="flex gap-4">
+            <div className="w-40 h-12 rounded-xl bg-gradient-to-r from-cyan-500/30 to-blue-600/30 animate-pulse"></div>
+            <div className="w-40 h-12 rounded-xl bg-white/5 border border-white/10 animate-pulse"></div>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="px-6 py-3 bg-white/5 rounded-full animate-pulse w-24"></div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Skeleton */}
+        <div className="lg:w-1/2 w-full max-w-xl mx-auto relative">
+          <div className="absolute top-3 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="w-8 h-8 bg-gray-700 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+          <div className="w-full aspect-[4/5] bg-gray-800 rounded-3xl animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+  );
+
+  if (isLoading) {
+    return (
+      <>
+        <Header />
+        <SkeletonLoader />
+        {/* Keep other sections hidden during loading */}
+      </>
+    );
+  }
 
   return (
     <>
@@ -161,7 +229,7 @@ const Hero = () => {
 
             {/* Enhanced Social Icons */}
             <div className="flex gap-6 mb-10">
-              {[
+             ={[
                 {
                   href: "https://github.com/shekhfaisal2110",
                   icon: <FaGithub />,
@@ -187,7 +255,7 @@ const Hero = () => {
                 <div key={idx} className="group relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-300" />
                   <a
-                    href={href}
+                    href={href.trim()} // Trim whitespace in URLs
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`relative w-16 h-16 rounded-full bg-gradient-to-r ${color} ${hoverColor} text-white text-2xl flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-2xl border border-white/20`}
@@ -237,57 +305,48 @@ const Hero = () => {
 
           {/* Right: Hero Image Section */}
           <div
-  className={`lg:w-1/2 relative w-full max-w-xl mx-auto transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl transform rounded-3xl border border-white/20 shadow-xl overflow-hidden ${
-    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-  }`}
->
-  {/* Skill Icons Bar */}
-  <div className="absolute top-3 left-1/2 transform -translate-x-1/2 flex gap-6 bg-black bg-opacity-30 backdrop-blur-md rounded-full px-6 py-2 shadow-lg">
-    {[FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt].map(
-      (Icon, index) => (
-        <div
-          key={index}
-          className="text-white text-3xl animate-bounce hover:text-cyan-400 transition-colors duration-300 cursor-pointer"
-          style={{ animationDelay: `${index * 150}ms` }}
-          title={
-            {
-              0: "HTML5",
-              1: "CSS3",
-              2: "JavaScript",
-              3: "React",
-              4: "Node.js",
-              5: "Git",
-            }[index]
-          }
-        >
-          <Icon />
-        </div>
-      )
-    )}
-  </div>
+            className={`lg:w-1/2 relative w-full max-w-xl mx-auto transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl transform rounded-3xl border border-white/20 shadow-xl overflow-hidden ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            {/* Skill Icons Bar */}
+            <div className="absolute top-3 left-1/2 transform -translate-x-1/2 flex gap-6 bg-black bg-opacity-30 backdrop-blur-md rounded-full px-6 py-2 shadow-lg">
+              {[FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt].map(
+                (Icon, index) => (
+                  <div
+                    key={index}
+                    className="text-white text-3xl animate-bounce hover:text-cyan-400 transition-colors duration-300 cursor-pointer"
+                    style={{ animationDelay: `${index * 150}ms` }}
+                    title={
+                      {
+                        0: "HTML5",
+                        1: "CSS3",
+                        2: "JavaScript",
+                        3: "React",
+                        4: "Node.js",
+                        5: "Git",
+                      }[index]
+                    }
+                  >
+                    <Icon />
+                  </div>
+                )
+              )}
+            </div>
 
-  <img
-    src={heroImg}
-    alt="Hero"
-    className="w-full h-auto rounded-3xl"
-    loading="lazy"
-    draggable={false}
-    style={{ userSelect: "none" }}
-  />
-<div className="absolute top-10 left-10 w-6 h-6 bg-cyan-400 rounded-full animate-ping opacity-60
-                            sm:top-10 sm:left-10
-                            xs:top-6 xs:left-6" />
-            <div className="absolute bottom-10 right-10 w-8 h-8 bg-purple-400 rounded-full animate-pulse opacity-60
-                            sm:bottom-10 sm:right-10
-                            xs:bottom-6 xs:right-6" />
-            <div className="absolute top-1/2 left-6 w-4 h-4 bg-blue-400 rounded-full animate-bounce opacity-60
-                            sm:top-1/2 sm:left-6
-                            xs:top-1/3 xs:left-4" />
-            <div className="absolute bottom-1/4 left-1/4 w-5 h-5 bg-pink-400 rounded-full animate-pulse opacity-60
-                            sm:bottom-1/4 sm:left-1/4
-                            xs:bottom-1/3 xs:left-1/5" />
-  
-</div>
+            <img
+              src={heroImg}
+              alt="Hero"
+              className="w-full h-auto rounded-3xl"
+              loading="lazy"
+              draggable={false}
+              style={{ userSelect: "none" }}
+            />
+            <div className="absolute top-10 left-10 w-6 h-6 bg-cyan-400 rounded-full animate-ping opacity-60 sm:top-10 sm:left-10 xs:top-6 xs:left-6" />
+            <div className="absolute bottom-10 right-10 w-8 h-8 bg-purple-400 rounded-full animate-pulse opacity-60 sm:bottom-10 sm:right-10 xs:bottom-6 xs:right-6" />
+            <div className="absolute top-1/2 left-6 w-4 h-4 bg-blue-400 rounded-full animate-bounce opacity-60 sm:top-1/2 sm:left-6 xs:top-1/3 xs:left-4" />
+            <div className="absolute bottom-1/4 left-1/4 w-5 h-5 bg-pink-400 rounded-full animate-pulse opacity-60 sm:bottom-1/4 sm:left-1/4 xs:bottom-1/3 xs:left-1/5" />
+          </div>
         </div>
 
         {/* Enhanced Scroll Indicator */}

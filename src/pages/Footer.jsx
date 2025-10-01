@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {Home, User, Briefcase, Settings, Mail, Quote, FileText} from "lucide-react";
-import {FaCode, FaRocket, FaGithub, FaLinkedin, FaInstagram, FaEnvelope} from "react-icons/fa";
+import { Home, User, Briefcase, Settings, Mail, Quote, FileText } from "lucide-react";
+import { FaCode, FaRocket, FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
 import ExpandedTabs from "../ui/ExpandedTabs";
-// If you have this, else use an animated header of your choice
 import TextScroll from "../ui/text-scroll";
 
 const Footer = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // <-- New loading state
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Simulate loading for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const navLinks = [
     { to: '/', icon: Home, label: 'Home', color: 'from-cyan-500 to-blue-600' },
@@ -23,8 +32,9 @@ const Footer = () => {
     { to: '/resume', icon: FileText, label: 'Resume', color: 'from-yellow-500 to-orange-600' },
     { to: '/contact', icon: Mail, label: 'Contact', color: 'from-blue-500 to-indigo-600' },
   ];
-  const tabsForExpandedTabs = navLinks.map(link =>
-    link.type === 'separator' ? { type: 'separator' }
+  const tabsForExpandedTabs = navLinks.map((link) =>
+    link.type === 'separator'
+      ? { type: 'separator' }
       : { title: link.label, icon: link.icon, to: link.to, color: link.color }
   );
 
@@ -60,6 +70,61 @@ const Footer = () => {
       }}
     />
   );
+
+  // Skeleton Loader UI
+  const SkeletonLoader = () => (
+    <footer
+      id="footer"
+      className="relative text-white py-20 overflow-hidden bg-gradient-to-br from-gray-950 via-indigo-950 to-purple-950"
+    >
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-12 lg:px-24">
+        {/* Header Skeleton */}
+        <div className="text-center mb-16">
+          <div className="h-14 w-80 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse mx-auto mb-8"></div>
+          <div className="relative max-w-3xl mx-auto p-8 rounded-3xl border border-white/30 shadow-2xl bg-white/10 backdrop-blur h-20 animate-pulse"></div>
+        </div>
+
+        {/* Navigation Skeleton */}
+        <div className="mb-16">
+          <div className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/30 animate-pulse">
+            <div className="h-8 w-48 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded mb-6 mx-auto"></div>
+            <div className="flex justify-center gap-4 overflow-x-auto pb-2">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="w-24 h-10 bg-white/15 rounded-lg animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Social Media Skeleton */}
+        <div className="mb-16">
+          <div className="bg-white/10 backdrop-blur-xl p-8 rounded-3xl border border-white/30 animate-pulse">
+            <div className="h-8 w-56 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded mb-6 mx-auto"></div>
+            <div className="flex justify-center gap-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="w-12 h-12 rounded-full bg-gray-700 animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Buttons Skeleton */}
+        <div className="max-w-4xl mx-auto mb-16 py-8 px-4 flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="w-48 h-14 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 rounded-xl animate-pulse"></div>
+          <div className="w-48 h-14 bg-white/10 border border-white/20 rounded-xl animate-pulse"></div>
+        </div>
+
+        {/* Bottom Bar & Copyright */}
+        <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm text-gray-400">
+          <div className="h-5 w-64 bg-white/10 rounded animate-pulse mx-auto"></div>
+        </div>
+      </div>
+    </footer>
+  );
+
+  if (isLoading) {
+    return <SkeletonLoader />;
+  }
 
   return (
     <>
@@ -128,7 +193,6 @@ const Footer = () => {
                     />
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -170,11 +234,11 @@ const Footer = () => {
                   ].map(({ href, icon }, i) => (
                     <a
                       key={i}
-                      href={href}
+                      href={href.trim()}
                       aria-label="Social Link"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={"relative w-12 h-12 rounded-full bg-gradient-to-r from-gray-700 via-indigo-700 to-gray-900 text-white shadow-lg flex items-center justify-center transform transition duration-300 ease-in-out hover:scale-110 hover:-translate-y-1 hover:shadow-2xl border border-white/20"}
+                      className="relative w-12 h-12 rounded-full bg-gradient-to-r from-gray-700 via-indigo-700 to-gray-900 text-white shadow-lg flex items-center justify-center transform transition duration-300 ease-in-out hover:scale-110 hover:-translate-y-1 hover:shadow-2xl border border-white/20"
                       title="Social"
                     >
                       {icon}
@@ -189,7 +253,7 @@ const Footer = () => {
 
           {/* Call to Action Section */}
           <div
-            className={`max-w-4xl mx-auto mb-16 py-8 px-4 flex flex-col sm:flex-row  items-center text-center flex-wrap justify-center gap-6 transition-all duration-[1000ms] delay-[900ms] ease-in-out ${
+            className={`max-w-4xl mx-auto mb-16 py-8 px-4 flex flex-col sm:flex-row items-center text-center flex-wrap justify-center gap-6 transition-all duration-[1000ms] delay-[900ms] ease-in-out ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
@@ -211,8 +275,8 @@ const Footer = () => {
 
           {/* Bottom Bar */}
           <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 opacity-70 animate-pulse" />
-          <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm text-gray-400 select-none ">
-            © 2025 Created by <span className="font-semibold text-white ">Shekh Faisal</span>. All rights reserved.
+          <div className="border-t border-white/20 pt-6 mt-6 text-center text-sm text-gray-400 select-none">
+            © 2025 Created by <span className="font-semibold text-white">Shekh Faisal</span>. All rights reserved.
           </div>
         </div>
       </footer>
@@ -221,4 +285,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

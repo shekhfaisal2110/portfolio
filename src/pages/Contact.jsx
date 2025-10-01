@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {FaUser,FaEnvelope,FaCommentDots,FaPaperPlane,FaSpinner,FaRocket,FaHeart,FaExternalLinkAlt,FaCalendarAlt,FaMapMarkerAlt,FaPhoneAlt,FaGithub,FaLinkedin,FaInstagram,FaGlobe,} from "react-icons/fa";
+import {
+  FaUser,
+  FaEnvelope,
+  FaCommentDots,
+  FaPaperPlane,
+  FaSpinner,
+  FaRocket,
+  FaHeart,
+  FaExternalLinkAlt,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaGlobe,
+} from "react-icons/fa";
 import Header from "./Header";
 import TextScroll from "../ui/text-scroll";
 
@@ -7,6 +23,16 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoadingPage, setIsLoadingPage] = useState(true); // <-- New page loader
+
+  // Simulate page load for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoadingPage(false);
+    }, 1500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
@@ -74,7 +100,7 @@ const Contact = () => {
     setLoading(true);
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbxCVGVy1kfOYw3AgbUZi9fUA4eU0WhZXF5Oah4ur_6qCfBGby4tVo0fFnVV2BcjQ3AT5w/exec", 
+        "https://script.google.com/macros/s/AKfycbxCVGVy1kfOYw3AgbUZi9fUA4eU0WhZXF5Oah4ur_6qCfBGby4tVo0fFnVV2BcjQ3AT5w/exec",
         {
           method: "POST",
           mode: "no-cors",
@@ -89,6 +115,68 @@ const Contact = () => {
     }
     setLoading(false);
   };
+
+  // Skeleton Loader UI
+  const SkeletonLoader = () => (
+    <section
+      id="contact"
+      className="relative min-h-screen py-20 bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white overflow-hidden"
+    >
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header Skeleton */}
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="h-12 w-80 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded animate-pulse mx-auto mb-8"></div>
+          <div className="relative backdrop-blur-lg bg-white/10 p-8 rounded-3xl border border-white/20 shadow-2xl max-w-3xl mx-auto h-16 animate-pulse"></div>
+        </div>
+
+        {/* Form & Info Skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
+          {/* Form Skeleton */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-lg p-8 max-w-xl mx-900px animate-pulse space-y-6">
+            <div className="h-6 w-32 bg-cyan-500/30 rounded mb-2"></div>
+            <div className="h-12 bg-white/15 rounded-xl"></div>
+
+            <div className="h-6 w-32 bg-indigo-500/30 rounded mb-2"></div>
+            <div className="h-12 bg-white/15 rounded-xl"></div>
+
+            <div className="h-6 w-36 bg-green-500/30 rounded mb-2"></div>
+            <div className="h-32 bg-white/15 rounded-xl"></div>
+
+            <div className="h-12 bg-gradient-to-r from-cyan-500/30 to-blue-600/30 rounded-xl"></div>
+          </div>
+
+          {/* Contact Info Skeleton */}
+          <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-lg p-8 max-w-xl mx-900px animate-pulse space-y-6">
+            <div className="h-8 w-48 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded mb-6"></div>
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-6 bg-white/20 rounded w-3/4"></div>
+            ))}
+            <div className="flex justify-center space-x-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="w-12 h-12 rounded-full mt-[3rem] md:mt-[5rem] bg-gray-700 animate-pulse"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Buttons Skeleton */}
+        <div className="max-w-4xl mx-auto text-center mb-6 py-8 px-4 flex flex-col sm:flex-row justify-center items-center gap-6">
+          <div className="w-56 h-14 bg-gradient-to-r from-cyan-500/30 to-emerald-600/30 rounded-xl animate-pulse"></div>
+          <div className="w-56 h-14 bg-gradient-to-r from-orange-500/30 to-red-600/30 rounded-xl animate-pulse"></div>
+          <div className="w-56 h-14 bg-gradient-to-r from-pink-500/30 to-purple-600/30 rounded-xl animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+  );
+
+  if (isLoadingPage) {
+    return (
+      <>
+        <Header />
+        <SkeletonLoader />
+      </>
+    );
+  }
 
   return (
     <>
@@ -112,12 +200,16 @@ const Contact = () => {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           {/* Header */}
-          <div className={`text-center mb-16 max-w-3xl mx-auto ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} transition-all duration-700`}>
+          <div
+            className={`text-center mb-16 max-w-3xl mx-auto ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            } transition-all duration-700`}
+          >
             <div className="flex justify-center items-center gap-4 mb-8">
               <div className="relative">
                 <div className="absolute -inset-3 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full blur-xl opacity-30 animate-pulse" />
               </div>
-               <h2
+              <h2
                 id="about-title"
                 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient"
               >
@@ -129,7 +221,7 @@ const Contact = () => {
               </h2>
             </div>
             <div className="relative backdrop-blur-lg bg-white/10 p-8 rounded-3xl border border-white/20 shadow-2xl max-w-3xl mx-auto">
-               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-3xl blur opacity-20" /> 
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-3xl blur opacity-20" />
               <p className="relative text-xl lg:text-2xl leading-relaxed text-gray-200">
                 I'd love to hear from you. Let's create something amazing together!
               </p>
@@ -137,7 +229,7 @@ const Contact = () => {
           </div>
 
           {/* Form and Contact Info */}
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
             {/* Contact Form */}
             <form
               onSubmit={handleSubmit}
@@ -221,21 +313,34 @@ const Contact = () => {
                 </li>
                 <li className="flex items-center gap-4">
                   <FaGlobe className="text-blue-400" />
-                  <a href="https://shekhfaisal.tech" target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-blue-300">
+                  <a
+                    href="https://shekhfaisal.tech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline hover:text-blue-300"
+                  >
                     shekhfaisal.tech
                   </a>
                 </li>
               </ul>
-              <div className="flex justify-center mt-[3rem] md:mt-[5rem] space-x-6 items-center ">
+              <div className="flex justify-center mt-[3rem] md:mt-[5rem] space-x-6 items-center">
                 <SocialIcon href="https://github.com/shekhfaisal2110" icon={<FaGithub />} label="GitHub" />
                 <SocialIcon href="https://www.linkedin.com/in/mohammad-faisal-shekh" icon={<FaLinkedin />} label="LinkedIn" />
-                <SocialIcon href="https://www.instagram.com/_shaikh__sahab_19_8/?igsh=N3M5a3FvZGxpN290#" icon={<FaInstagram />} label="Instagram" />
+                <SocialIcon
+                  href="https://www.instagram.com/_shaikh__sahab_19_8/?igsh=N3M5a3FvZGxpN290#"
+                  icon={<FaInstagram />}
+                  label="Instagram"
+                />
               </div>
             </address>
           </div>
 
           {/* Call to Action */}
-          <div className={`max-w-4xl mx-auto text-center mb-6 py-8 px-4 flex flex-col sm:flex-row justify-center items-center gap-6  ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} transition-all duration-700`}>
+          <div
+            className={`max-w-4xl mx-auto text-center mb-6 py-8 px-4 flex flex-col sm:flex-row justify-center items-center gap-6 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            } transition-all duration-700`}
+          >
             <a
               href="/contact"
               className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-cyan-500 to-emerald-600 text-white font-bold rounded-xl shadow-lg transform transition hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-cyan-400"
@@ -276,7 +381,7 @@ const Contact = () => {
 
 const SocialIcon = ({ href, icon, label }) => (
   <a
-    href={href}
+    href={href.trim()}
     aria-label={label}
     target="_blank"
     rel="noopener noreferrer"
