@@ -23,6 +23,8 @@ import Resume from "./Resume";
 import Testimonials from "./Testimonials";
 import Footer from "./Footer";
 import Header from "./Header";
+import SEOHelmet from '../components/SEOHelmet';
+import LogoImg from '../assets/logo/icon.jpg'
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -163,6 +165,14 @@ const Hero = () => {
 
   return (
     <>
+    <SEOHelmet
+        title="Web Developer & Frontend Engineer"
+        description="Shekh Faisal - BCA student and Web Developer Intern at SkillCraft Technology. Specializing in React.js, and Frontend development. View my portfolio of innovative web applications."
+        keywords="Shekh Faisal, Web Developer, React.js,  Frontend Developer, Portfolio, SkillCraft Technology, BCA Student"
+        url="/"
+        image={LogoImg}
+      />
+
       <Header />
       <ParticleTrail />
       <section
@@ -229,7 +239,7 @@ const Hero = () => {
 
             {/* Enhanced Social Icons */}
             <div className="flex gap-6 mb-10">
-             ={[
+             {[
                 {
                   href: "https://github.com/shekhfaisal2110",
                   icon: <FaGithub />,
@@ -366,7 +376,7 @@ const Hero = () => {
       <Resume />
       <Testimonials />
       <Contact />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
