@@ -10,6 +10,7 @@ import img9 from "../assets/projectImg/9.png";
 import img10 from "../assets/projectImg/10.png";
 import img11 from "../assets/projectImg/11.png";
 import img12 from "../assets/projectImg/12.png";
+import img13 from "../assets/projectImg/13.png";
 
 const mockPortfolioData = [
   {
@@ -107,6 +108,16 @@ const mockPortfolioData = [
     image: img12,
     link: "https://to-do-list-react-faisal.netlify.app/",
     hostedDate: "2025-06-25"
-  }
+  },
+  {
+  id: 13,
+  title: "Car Poster Design",
+  category: "graphics",
+  image: img13, 
+  link: "https://www.figma.com/design/h27KKkY9gTgwnP6MfCGYHz/Car-Poster?node-id=0-1&t=bRTjFMvKaWlSAMY0-1",
+  hostedDate: "2025-10-27",
+  description: "A sleek, modern car poster designed in Figma featuring bold typography, glossy highlights, and a cinematic gradient background inspired by sports car aesthetics."
+}
+
 ]
   export default mockPortfolioData;
