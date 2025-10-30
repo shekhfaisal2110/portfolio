@@ -11,6 +11,7 @@ import img10 from "../assets/projectImg/10.png";
 import img11 from "../assets/projectImg/11.png";
 import img12 from "../assets/projectImg/12.png";
 import img13 from "../assets/projectImg/13.png";
+import img14 from "../assets/projectImg/14.png";
 
 const mockPortfolioData = [
   {
@@ -112,12 +113,20 @@ const mockPortfolioData = [
   {
   id: 13,
   title: "Car Poster Design",
-  category: "graphics",
+  category: "figma-designs",
   image: img13, 
   link: "https://www.figma.com/design/h27KKkY9gTgwnP6MfCGYHz/Car-Poster?node-id=0-1&t=bRTjFMvKaWlSAMY0-1",
   hostedDate: "2025-10-27",
-  description: "A sleek, modern car poster designed in Figma featuring bold typography, glossy highlights, and a cinematic gradient background inspired by sports car aesthetics."
-}
+  description: "A sleek, modern car poster designed in Figma featuring bold typography, glossy highlights, and a cinematic gradient background inspired by high-end automotive ads."
+  },
+  {
+    id: 14,
+    title: "ShekhTechQuiz",
+    category: "react-projects",
+    image: img14,
+    link: "https://shekhtechquiz.netlify.app/",
+    hostedDate: "2025-10-30"
+  }
 
 ]
   export default mockPortfolioData;

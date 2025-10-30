@@ -15,6 +15,7 @@ import {
   FaEye,
   FaLaptopCode,
   FaPalette,
+  FaFigma,
 } from "react-icons/fa";
 import Header from "./Header";
 import mockPortfolioData from "../data/portfolioData";
@@ -153,13 +154,14 @@ const Portfolio = () => {
 
   // Rest of your original logic remains unchanged
   const filters = [
-    { label: "All Projects", value: "all", icon: <FaCode />, gradient: "from-cyan-500 to-blue-600" },
-    { label: "Web Design", value: "web-design", icon: <FaPalette />, gradient: "from-blue-500 to-indigo-600" },
-    { label: "Web Development", value: "web-development", icon: <FaLaptopCode />, gradient: "from-green-500 to-cyan-600" },
-    { label: "Mobile Apps", value: "mobile-apps", icon: <FaMobileAlt />, gradient: "from-orange-500 to-red-600" },
-    { label: "Games", value: "games", icon: <FaGamepad />, gradient: "from-purple-500 to-indigo-600" },
-    { label: "React Projects", value: "react", icon: <FaReact />, gradient: "from-cyan-400 to-blue-500" },
-    { label: "AI / Tools", value: "ai-tools", icon: <FaRobot />, gradient: "from-pink-500 to-rose-600" },
+  { label: "All Projects", value: "all", icon: <FaCode />, gradient: "from-cyan-500 to-blue-600" },
+  { label: "Web Design", value: "web-design", icon: <FaPalette />, gradient: "from-blue-500 to-indigo-600" },
+  { label: "Web Development", value: "web-development", icon: <FaLaptopCode />, gradient: "from-green-500 to-cyan-600" },
+  { label: "Mobile Apps", value: "mobile-apps", icon: <FaMobileAlt />, gradient: "from-orange-500 to-red-600" },
+  { label: "Games", value: "games", icon: <FaGamepad />, gradient: "from-purple-500 to-indigo-600" },
+  { label: "React Projects", value: "react", icon: <FaReact />, gradient: "from-cyan-400 to-blue-500" },
+  { label: "AI / Tools", value: "ai-tools", icon: <FaRobot />, gradient: "from-pink-500 to-rose-600" },
+  { label: "Figma Designs", value: "figma-designs", icon: <FaFigma />, gradient: "from-fuchsia-500 to-violet-600" },
   ];
 
   const countByCategory = (value) => {
