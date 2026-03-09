@@ -12,6 +12,7 @@ import img11 from "../assets/projectImg/11.png";
 import img12 from "../assets/projectImg/12.png";
 import img13 from "../assets/projectImg/13.png";
 import img14 from "../assets/projectImg/14.png";
+import img15 from "../assets/projectImg/15.png";
 
 const mockPortfolioData = [
   {
@@ -126,7 +127,15 @@ const mockPortfolioData = [
     image: img14,
     link: "https://shekhtechquiz.netlify.app/",
     hostedDate: "2025-10-30"
-  }
+  },
+  {
+    id: 15,
+    title: "Salah Streak",
+    category: "react-projects",
+    image: img15,
+    link: "https://salah-streak.netlify.app/",
+    hostedDate: "2026-02-20"
+  },
 
 ]
   export default mockPortfolioData;
